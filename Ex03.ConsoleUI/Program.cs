@@ -6,7 +6,7 @@ namespace Ex03.ConsoleUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello world!");
         }
     }
 }
