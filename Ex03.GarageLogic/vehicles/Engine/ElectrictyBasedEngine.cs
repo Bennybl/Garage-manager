@@ -4,11 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    enum eColor
+    internal class ElectrictyBasedEngine : Engine
     {
-        Black,
-        White,
-        Silver,
-        Red 
     }
 }

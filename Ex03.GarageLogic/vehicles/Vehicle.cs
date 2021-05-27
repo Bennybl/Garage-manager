@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex03.GarageLogic.vehicles
+namespace Ex03.GarageLogic
 {
-    class Vehicle
+    internal abstract class Vehicle
     {
         protected string m_LicenceNumber;
         protected float m_energyLeft;
