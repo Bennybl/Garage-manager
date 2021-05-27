@@ -5,7 +5,11 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : Vehicle
+    internal abstract class Truck : Vehicle
     {
+        protected bool m_isHavingDangerousMetrials;
+        protected float m_MaxCapcity;
+        internal static readonly int sr_NumOfTires = 16;
+        internal static readonly float sr_MaxTirePressure = 26f;
     }
 }
