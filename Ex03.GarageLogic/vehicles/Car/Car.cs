@@ -18,7 +18,23 @@ namespace Ex03.GarageLogic
         {
            NumberOfDoors(i_NumberOfDoors);
            Color(i_Color);
+           FuelType(i_fuelType);
            
+        }
+
+        private void SetEngine()
+        {
+            if(m_FuelType == eFuelType.electricty)
+            {
+                this.engine = new ElectrictyBasedEngine();
+                engine.SetE();
+            }
+        }
+        internal eFuelType FuelType
+        {
+            set { m_FuelType = value; }
+            get { return m_FuelType; }
+
         }
 
         internal int NumberOfDoors
