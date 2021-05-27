@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         protected float m_CurrentEnergy;
         protected float m_MaximumEnergy;
-        protected eFuelType m_fuelType;
+        protected eFuelType m_FuelType;
 
         internal float MaximumEnergy
         {
@@ -21,8 +21,9 @@ namespace Ex03.GarageLogic
             get { return m_CurrentEnergy; }
         }
 
-        internal void EnergyRefil(int i_AmountOfGivenEnergy, eFuelType i_fuelType)
-        {
+        internal abstract void EnergyRefil(float i_AmountOfGivenEnergy, eFuelType i_FuelType);
+        /**
+         *         {
             if (i_AmountOfGivenEnergy + m_CurrentEnergy > m_MaximumEnergy)
             {
                 throw new SystemException();
@@ -36,10 +37,17 @@ namespace Ex03.GarageLogic
                 m_CurrentEnergy += i_AmountOfGivenEnergy;
             }
         }
-        
+        **/
+
+        internal void EnergyRefilToMax()
+        {
+            m_CurrentEnergy = m_MaximumEnergy;
+        }
+
+
         public override string ToString()
         {
-            return String.Format("Eneing Based: {0} Current amount of energy: {1} Maximum of energy capcity: {2}",fuelType, m_CurrentEnergy, m_MaximumEnergy);
+            return String.Format("Eneing Based: {0} Current amount of energy: {1} Maximum of energy capcity: {2}",m_FuelType, m_CurrentEnergy, m_MaximumEnergy);
         }
     }
 }

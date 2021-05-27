@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         private float m_CurrentPressure;
         private readonly float m_MaxPressure;
-        private string m_FactoryName;
+        private string m_FactoryName = "Michelin";
 
         internal Tire(float i_currentPressure, float i_MaxPressure)
         {
