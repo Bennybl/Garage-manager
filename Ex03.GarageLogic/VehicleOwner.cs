@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    publiv class Customer
+    publiv class VehicleOwner
     {
     }
 

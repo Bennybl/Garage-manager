@@ -6,5 +6,10 @@ namespace Ex03.GarageLogic.vehicles.Engine
 {
     internal class FuelBasedEngine : Engine
     {
+
+        public void SetF()
+        {
+
+        }
     }
 }

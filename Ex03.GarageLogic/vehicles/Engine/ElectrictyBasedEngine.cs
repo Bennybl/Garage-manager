@@ -6,5 +6,9 @@ namespace Ex03.GarageLogic
 {
     internal class ElectrictyBasedEngine : Engine
     {
+        public void SetE()
+        {
+
+        }
     }
 }

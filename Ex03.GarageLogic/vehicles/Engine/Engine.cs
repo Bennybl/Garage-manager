@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         protected float m_CurrentEnergy;
         protected float m_MaximumEnergy;
-        protected eFuelType fuelType;
+        protected eFuelType m_fuelType;
 
         internal float MaximumEnergy
         {
@@ -37,12 +37,9 @@ namespace Ex03.GarageLogic
             }
         }
         
-
-     
-
         public override string ToString()
         {
-            return String.Format("Current amount of energy: {0} Maximum of energy capcity: {1}", m_CurrentEnergy, m_MaximumEnergy);
+            return String.Format("Eneing Based: {0} Current amount of energy: {1} Maximum of energy capcity: {2}",fuelType, m_CurrentEnergy, m_MaximumEnergy);
         }
     }
 }
