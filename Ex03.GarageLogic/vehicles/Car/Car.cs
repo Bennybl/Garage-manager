@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
     {
         protected eColor m_Color;
         protected  int m_numOfDoors;
-        protected eFuelType m_FeulType;
+        protected eFuelType m_FuelType;
         protected Engine engine;
         internal static readonly int sr_NumOfTires = 4;
         internal static readonly float sr_MaxTirePressure = 32f;
@@ -18,10 +18,7 @@ namespace Ex03.GarageLogic
         {
            NumberOfDoors(i_NumberOfDoors);
            Color(i_Color);
-           m_numOfDoors = 
-        }
-        {
-             
+           
         }
 
         internal int NumberOfDoors
