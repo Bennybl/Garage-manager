@@ -10,6 +10,6 @@ namespace Ex03.GarageLogic.vehicles
         protected float m_energyLeft;
         protected Tire[] m_VehicleTire;
         protected string m_ModelName;
-        ///protected const float k_MinimumValue=0;
+        protected const float k_MaxEnergy=0;
     }
 }
