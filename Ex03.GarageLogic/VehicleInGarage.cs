@@ -9,14 +9,31 @@ namespace Ex03.GarageLogic
         private int m_LicenseNumber;
         private Customer m_VehicleOwener;
         private eVehicleStatus m_VehicleStatus;
+        private Vehicle m_Vehicle;
 
-        internal VehicleInGarage(int i_LicenseNumber, Customer i_VehicleOwener)
+        internal VehicleInGarage(int i_LicenseNumber, Customer i_VehicleOwener, Vehicle i_Vehicle)
         {
             m_LicenseNumber = i_LicenseNumber;
             m_VehicleOwener = i_VehicleOwener;
             m_VehicleStatus = eVehicleStatus.InRepair;
+            m_Vehicle = i_Vehicle;
         }
 
+
+        internal int LicenseNumber
+        {
+            get { return m_LicenseNumber; }
+        }
+
+        internal Vehicle Vehicle
+        {
+            get { return m_Vehicle; }
+        }
+
+        internal eVehicleStatus VehicleStatus
+        {
+            get { return m_VehicleStatus; }
+        }
         internal void UpdateVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
             m_VehicleStatus = i_VehicleStatus;

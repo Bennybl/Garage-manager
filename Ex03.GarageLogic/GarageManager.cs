@@ -49,6 +49,43 @@ namespace Ex03.GarageLogic
         {
             return null;
         }
+
+        private Vehicle SearchVehicleByLicenseNumber(int i_LicenseNumber)
+        {
+            Vehicle vehicle = null;
+            foreach (VehicleInGarage vehicleInGarage in m_Vehicles)
+            {
+                if(vehicleInGarage.LicenseNumber == i_LicenseNumber)
+                {
+                    vehicle = vehicleInGarage.Vehicle;
+                }
+            }
+            return vehicle;
+        }
+        //to implement
+        private void InsertNewCar()
+        {
+
+        }
+        //to implement
+        private void AddNewCustomer()
+        {
+
+        }
+        //to implement
+        private Customer SearchCustomerByName(string i_CustomerName)
+        {
+            return null;
+        }
+        //to implement
+        private List<string> GetVehicleLicenseNumberByStatus(eVehicleStatus i_VehicleStatus)
+        {
+            List<string> sortedVehicls = new List<string>();
+
+            return null;
+        }
+
+
     }
    
 }
