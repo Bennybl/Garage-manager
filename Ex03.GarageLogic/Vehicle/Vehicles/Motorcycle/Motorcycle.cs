@@ -12,31 +12,75 @@ namespace Ex03.GarageLogic
         internal static readonly int sr_NumOfTires = 2;
         internal static readonly float sr_MaxTirePressure = 30f;
 
-        //to implement
-        internal Motorcycle()
+
+        internal Motorcycle(eEngineBased i_VehicleType, eLicenseType i_LicenseType, int i_EngineVolume, string i_LicenceNumber, string i_ModelName)
         {
+            m_LicenseType = i_LicenseType;
+            m_EngineVolume = i_EngineVolume;
+            m_VehicleType = i_VehicleType;
+            m_LicenceNumber = i_LicenceNumber;
+            m_ModelName = i_ModelName;
+            SetVehicleType();
 
         }
 
-        //to implement
-        internal override void EnergyRefill(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
+        internal override void SetVehicleType()
         {
-            throw new NotImplementedException();
+            if (m_VehicleType == eEngineBased.Electricty)
+            {
+                ElectrictyBasedEngine m_Engine = new ElectrictyBasedEngine();
+                m_Engine.MaximumEnergy = 1.8f;
+                m_Engine.m_FuelType = eFuelType.electricty;
+
+            }
+            else
+            {
+                FuelBasedEngine m_Engine = new FuelBasedEngine();
+                m_Engine.MaximumEnergy = 6f;
+                m_Engine.m_FuelType = eFuelType.Octan98;
+            }
         }
-        //to implement
+
         internal override void SetTires()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < sr_NumOfTires; i++)
+            {
+                m_VehicleTire.Add(new Tire(sr_MaxTirePressure / 2, sr_MaxTirePressure));
+            }
         }
-        //to implement
-        internal override void InflameTire(float i_GivenAirPressure)
-        {
-            throw new NotImplementedException();
-        }
-        //to implement
+
         internal override void InflameTireToMax()
         {
-            throw new NotImplementedException();
+            foreach (Tire tire in m_VehicleTire)
+            {
+                tire.InflameToMax();
+            }
+        }
+
+        internal override void InflameTire(float i_GivenAirPressure)
+        {
+            foreach (Tire tire in m_VehicleTire)
+            {
+                tire.Inflame(i_GivenAirPressure);
+            }
+        }
+
+        internal override void EnergyRefill(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
+        {
+            m_Engine.EnergyRefil(i_AmountOfGivenEnergy, FuelType);
+            m_CurrentEnergy = m_Engine.CurrentEnergy;
+        }
+
+        internal eFuelType FuelType
+        {
+            get { return m_Engine.m_FuelType; }
+
+        }
+
+        //to implement
+        public override string ToString()
+        {
+            return "";
         }
     }
 }

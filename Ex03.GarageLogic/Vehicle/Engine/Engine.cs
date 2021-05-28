@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         protected float m_CurrentEnergy;
         protected float m_MaximumEnergy;
-        protected eFuelType m_FuelType;
+        internal eFuelType m_FuelType;
 
         internal float MaximumEnergy
         {

@@ -12,35 +12,64 @@ namespace Ex03.GarageLogic
         internal static readonly int sr_NumOfTires = 16;
         internal static readonly float sr_MaxTirePressure = 26f;
 
-        //to implement
-        internal Truck()
+        internal Truck(eEngineBased i_VehicleType, int i_MaxCapcity, bool i_isHavingDangerousMetrials, string i_LicenceNumber, string i_ModelName)
         {
-
+            m_VehicleType = i_VehicleType;
+            m_MaxCapcity = i_MaxCapcity;
+            m_isHavingDangerousMetrials = i_isHavingDangerousMetrials;
+            m_LicenceNumber = i_LicenceNumber;
+            m_ModelName = i_ModelName;
+            SetVehicleType();
         }
 
-        //to implement
+        internal override void SetVehicleType()
+        {
+                FuelBasedEngine m_Engine = new FuelBasedEngine();
+                m_Engine.MaximumEnergy = 120f;
+            m_Engine.m_FuelType = eFuelType.Soler;
+        }
+        
+
         internal override void SetTires()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < sr_NumOfTires; i++)
+            {
+                m_VehicleTire.Add(new Tire(sr_MaxTirePressure / 2, sr_MaxTirePressure));
+            }
         }
 
-        //to implement
+        internal override void InflameTireToMax()
+        {
+            foreach (Tire tire in m_VehicleTire)
+            {
+                tire.InflameToMax();
+            }
+        }
+
         internal override void InflameTire(float i_GivenAirPressure)
         {
-            throw new NotImplementedException();
+            foreach (Tire tire in m_VehicleTire)
+            {
+                tire.Inflame(i_GivenAirPressure);
+            }
         }
 
-        //to implement
-        internal override void InflameTireToMax()
-
-        {
-            throw new NotImplementedException();
-        }
-
-        //to implement
         internal override void EnergyRefill(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
         {
-            throw new NotImplementedException();
+            m_Engine.EnergyRefil(i_AmountOfGivenEnergy, FuelType);
+            m_CurrentEnergy = m_Engine.CurrentEnergy;
+        }
+
+        internal eFuelType FuelType
+        {
+            get { return m_Engine.m_FuelType; }
+
+        }
+
+        //to implement
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

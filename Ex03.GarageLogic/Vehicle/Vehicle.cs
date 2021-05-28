@@ -10,6 +10,10 @@ namespace Ex03.GarageLogic
         protected float m_CurrentEnergy;
         protected List<Tire> m_VehicleTire;
         protected string m_ModelName;
+        protected eEngineBased m_VehicleType;
+        protected Engine m_Engine;
+        
+        internal abstract void SetVehicleType();
 
         internal abstract void EnergyRefill(float i_AmountOfGivenEnergy, eFuelType i_FuelType);
         internal abstract void SetTires();

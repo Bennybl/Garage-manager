@@ -9,33 +9,35 @@ namespace Ex03.GarageLogic
     {
         private eColor m_Color;
         private  int m_numOfDoors;
-        private eFuelType m_FuelType;
-        protected readonly Engine m_Engine;
         internal static readonly int sr_NumOfTires = 4;
         internal static readonly float sr_MaxTirePressure = 32f;
 
-        internal Car (eFuelType i_FuelType, int i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
+        internal Car (eEngineBased i_VehicleType, int i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
         {
             m_numOfDoors =  i_NumberOfDoors;
             m_Color = i_Color;
-            m_FuelType = i_FuelType;
+            m_VehicleType = i_VehicleType;
             m_LicenceNumber = i_LicenceNumber;
             m_ModelName = i_ModelName;
-            SetEngineType();
+            SetVehicleType();
 
 
         }
 
-        private void SetEngineType()
+        internal override void SetVehicleType()
         {
-            if(m_FuelType == eFuelType.electricty)
+            if(m_VehicleType == eEngineBased.Electricty)
             {
                 ElectrictyBasedEngine m_Engine = new ElectrictyBasedEngine();
+                m_Engine.MaximumEnergy = 3.2f;
+                m_Engine.m_FuelType = eFuelType.electricty;
                 
             }
             else
             {
                 FuelBasedEngine m_Engine = new FuelBasedEngine();
+                m_Engine.MaximumEnergy = 45f;
+                m_Engine.m_FuelType = eFuelType.Octan95;
             }
         }
 
@@ -71,7 +73,7 @@ namespace Ex03.GarageLogic
 
         internal eFuelType FuelType
         {
-            get { return m_FuelType; }
+            get { return m_Engine.m_FuelType; }
 
         }
 
