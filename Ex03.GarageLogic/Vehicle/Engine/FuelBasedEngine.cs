@@ -6,6 +6,7 @@ namespace Ex03.GarageLogic
 {
     internal class FuelBasedEngine : Engine
     {
+        //Exeption to implement
         internal override void EnergyRefil(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
         {
 

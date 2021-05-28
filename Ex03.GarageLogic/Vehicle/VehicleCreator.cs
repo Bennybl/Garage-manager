@@ -48,7 +48,6 @@ namespace Ex03.GarageLogic
             return CreateVehicle();
         }
 
-
         internal Vehicle CreateVehicle()
         {
             Vehicle vehicle = null;
@@ -65,7 +64,7 @@ namespace Ex03.GarageLogic
                 vehicle = new Motorcycle(m_EngineBased, m_LicenseType, m_EngineVolume, m_LicenceNumber, m_ModelName);
                 break;
             case eVehicleType.Truck:
-                vehicle = new Truck(m_EngineBased, m_MaxCapcity, m_isHavingDangerousMetrials, m_LicenceNumber, m_ModelNam);
+                vehicle = new Truck(m_EngineBased, m_MaxCapcity, m_isHavingDangerousMetrials, m_LicenceNumber, m_ModelName);
                 break;
         }
             return vehicle;
