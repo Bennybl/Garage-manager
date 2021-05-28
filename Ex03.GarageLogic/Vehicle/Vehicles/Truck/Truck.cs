@@ -12,9 +12,9 @@ namespace Ex03.GarageLogic
         internal static readonly int sr_NumOfTires = 16;
         internal static readonly float sr_MaxTirePressure = 26f;
 
-        internal Truck(eEngineBased i_VehicleType, int i_MaxCapcity, bool i_isHavingDangerousMetrials, string i_LicenceNumber, string i_ModelName)
+        internal Truck(eEngineBased i_EngineBased, float i_MaxCapcity, bool i_isHavingDangerousMetrials, string i_LicenceNumber, string i_ModelName)
         {
-            m_VehicleType = i_VehicleType;
+            m_EngineBased = i_EngineBased;
             m_MaxCapcity = i_MaxCapcity;
             m_isHavingDangerousMetrials = i_isHavingDangerousMetrials;
             m_LicenceNumber = i_LicenceNumber;
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
         {
                 FuelBasedEngine m_Engine = new FuelBasedEngine();
                 m_Engine.MaximumEnergy = 120f;
-            m_Engine.m_FuelType = eFuelType.Soler;
+                m_Engine.m_FuelType = eFuelType.Soler;
         }
         
 

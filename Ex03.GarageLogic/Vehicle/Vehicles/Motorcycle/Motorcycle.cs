@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
         {
             m_LicenseType = i_LicenseType;
             m_EngineVolume = i_EngineVolume;
-            m_VehicleType = i_VehicleType;
+            m_EngineBased = i_VehicleType;
             m_LicenceNumber = i_LicenceNumber;
             m_ModelName = i_ModelName;
             SetVehicleType();
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
 
         internal override void SetVehicleType()
         {
-            if (m_VehicleType == eEngineBased.Electricty)
+            if (m_EngineBased == eEngineBased.Electricty)
             {
                 ElectrictyBasedEngine m_Engine = new ElectrictyBasedEngine();
                 m_Engine.MaximumEnergy = 1.8f;

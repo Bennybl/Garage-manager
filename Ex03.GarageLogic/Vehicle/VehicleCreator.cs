@@ -6,32 +6,69 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleCreator
     {
+        private eEngineBased m_EngineBased;
+        private eVehicleType m_eVehicleType;
+        private string m_LicenceNumber;
+        private string m_ModelName;
+        private bool m_isHavingDangerousMetrials;
+        private float m_MaxCapcity;
+        private int m_EngineVolume;
+        private eLicenseType m_LicenseType;
+        private eColor m_Color;
+        private int m_numOfDoors;
 
 
-        internal static Vehicle CreateVehicle(eEngineBased i_EngineBased, eVehicleType i_eVehicleType, string  i_LicenceNumber, string i_ModelName)
+        internal VehicleCreator(eEngineBased i_EngineBased, eVehicleType i_eVehicleType, string i_LicenceNumber, string i_ModelName)
+        {
+            m_EngineBased = i_EngineBased;
+            m_eVehicleType = i_eVehicleType;
+            m_LicenceNumber = i_LicenceNumber;
+            m_ModelName = i_ModelName;
+        }
+
+        internal Vehicle SetCarMaterials(eColor i_color, int i_numOfDoors)
+        {
+            m_Color = i_color;
+            m_numOfDoors = i_numOfDoors;
+
+            return CreateVehicle();
+        }
+        internal Vehicle SetMotorcycleMaterials(int i_EngineVolume, eLicenseType i_LicenseType)
+        {
+            m_EngineVolume = i_EngineVolume;
+            m_LicenseType = i_LicenseType;
+
+            return CreateVehicle();
+        }
+        internal Vehicle SetTruckMaterials(float i_MaxCapcity,bool i_isHavingDangerousMetrials)
+        {
+            m_isHavingDangerousMetrials = i_isHavingDangerousMetrials;
+            m_MaxCapcity = i_MaxCapcity;
+
+            return CreateVehicle();
+        }
+
+
+        internal Vehicle CreateVehicle()
         {
             Vehicle vehicle = null;
-            switch (i_EngineBased)
-            {
-                case eEngineBased.FuelBased:
-
-                    switch (i_eVehicleType)
-                    {
-                        case eVehicleType.Car:
-                            vehicle = new Car(i_EngineBased, 4, eColor.Black, i_LicenceNumber, i_ModelName);
-                            break;
-
-                        case eVehicleType.Motorcycle:
-                            vehicle = new Motorcycle(i_EngineBased,i_LicenseType, int i_EngineVolume, i_LicenceNumber, i_ModelName)
-                    }
-
-                        
+            
                             
-                
 
-                
+        switch (m_eVehicleType)
+        {
+            case eVehicleType.Car:
+                vehicle = new Car(m_EngineBased, m_numOfDoors, eColor.Black, m_LicenceNumber, m_ModelName);
+                break;
 
-            return retVehicle;
+            case eVehicleType.Motorcycle:
+                vehicle = new Motorcycle(m_EngineBased, m_LicenseType, m_EngineVolume, m_LicenceNumber, m_ModelName);
+                break;
+            case eVehicleType.Truck:
+                vehicle = new Truck(m_EngineBased, m_MaxCapcity, m_isHavingDangerousMetrials, m_LicenceNumber, m_ModelNam);
+                break;
+        }
+            return vehicle;
         }
     }
 }

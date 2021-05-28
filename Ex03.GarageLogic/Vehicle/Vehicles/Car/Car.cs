@@ -12,11 +12,11 @@ namespace Ex03.GarageLogic
         internal static readonly int sr_NumOfTires = 4;
         internal static readonly float sr_MaxTirePressure = 32f;
 
-        internal Car (eEngineBased i_VehicleType, int i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
+        internal Car (eEngineBased i_EngineBased, int i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
         {
             m_numOfDoors =  i_NumberOfDoors;
             m_Color = i_Color;
-            m_VehicleType = i_VehicleType;
+            m_EngineBased = i_EngineBased;
             m_LicenceNumber = i_LicenceNumber;
             m_ModelName = i_ModelName;
             SetVehicleType();
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
 
         internal override void SetVehicleType()
         {
-            if(m_VehicleType == eEngineBased.Electricty)
+            if(m_EngineBased == eEngineBased.Electricty)
             {
                 ElectrictyBasedEngine m_Engine = new ElectrictyBasedEngine();
                 m_Engine.MaximumEnergy = 3.2f;
