@@ -6,24 +6,27 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleCreator
     {
+        private Dictionary<string, Object> m_VehicleMetrials;
         private eEngineBased m_EngineBased;
         private eVehicleType m_eVehicleType;
         private string m_LicenceNumber;
         private string m_ModelName;
-        private bool m_isHavingDangerousMetrials;
-        private float m_MaxCapcity;
+
+        
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
         private eColor m_Color;
         private int m_numOfDoors;
+        
 
-
-        internal VehicleCreator(eEngineBased i_EngineBased, eVehicleType i_eVehicleType, string i_LicenceNumber, string i_ModelName)
+        internal VehicleCreator(Dictionary<string, Object> i_VehicleMetrials)
         {
-            m_EngineBased = i_EngineBased;
-            m_eVehicleType = i_eVehicleType;
-            m_LicenceNumber = i_LicenceNumber;
-            m_ModelName = i_ModelName;
+            m_VehicleMetrials = i_VehicleMetrials;
+            m_EngineBased = (eEngineBased) m_VehicleMetrials["EngineBased"];
+            m_eVehicleType = (eVehicleType)m_VehicleMetrials[""];
+            m_ModelName = (string)m_VehicleMetrials[""];
+            
+
         }
 
         internal Vehicle SetCarMaterials(eColor i_color, int i_numOfDoors)
@@ -52,17 +55,24 @@ namespace Ex03.GarageLogic
         {
             Vehicle vehicle = null;
            
-        switch (m_eVehicleType)
+        switch (m_VehicleMetrials["VehicleType"])
         {
-            case eVehicleType.Car:
-                vehicle = new Car(m_EngineBased, m_numOfDoors, eColor.Black, m_LicenceNumber, m_ModelName);
-                break;
+            
 
-            case eVehicleType.Motorcycle:
-                vehicle = new Motorcycle(m_EngineBased, m_LicenseType, m_EngineVolume, m_LicenceNumber, m_ModelName);
+            case eVehicleType.Car:
+                vehicle = new Car(, m_VehicleMetrials["numOfDoors"], m_VehicleMetrials["LicenceNumber"], m_VehicleMetrials["ModelName"]);
                 break;
+            
+            case eVehicleType.Motorcycle:
+                bool isHavingDangerousMetrials = (bool)m_VehicleMetrials[""];
+                float maxCapcity = (float)m_VehicleMetrials[""];
+                vehicle = new Motorcycle(m_VehicleMetrials["EngineBased"], m_VehicleMetrials["LicenseType"], m_VehicleMetrials["EngineVolume"], m_VehicleMetrials["ModelName"]);
+                break;
+            
             case eVehicleType.Truck:
-                vehicle = new Truck(m_EngineBased, m_MaxCapcity, m_isHavingDangerousMetrials, m_LicenceNumber, m_ModelName);
+                bool isHavingDangerousMetrials = (bool)m_VehicleMetrials[""];
+                float maxCapcity = (float)m_VehicleMetrials[""];
+                vehicle = new Truck(m_EngineBased, maxCapcity, isHavingDangerousMetrials,m_LicenceNumber, m_ModelName);
                 break;
         }
             return vehicle;

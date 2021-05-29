@@ -22,6 +22,5 @@ namespace Ex03.GarageLogic
 
         internal abstract void InflameTireToMax();
 
-
     }
 }

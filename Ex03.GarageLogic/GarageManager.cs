@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
             bool isVehicleInGarage = true;
             if(SearchVehicleByLicenseNumber(i_LicenseNumber) != null)
             {
-                updateVehicleStatus(i_LicenseNumber , eVehicleStatus.InRepair);
+                UpdateVehicleStatus(i_LicenseNumber , eVehicleStatus.InRepair);
                 isVehicleInGarage = false;
             }
             
@@ -45,34 +45,52 @@ namespace Ex03.GarageLogic
 
         }
 
-        //to implement
+        //**
         private void getLicenseNumber(eVehicleStatus i_VehicleStatus)
         {
 
         }
 
-        //to implement
-        private void updateVehicleStatus(int i_LicenseNumber, eVehicleStatus i_VehicleStatus)
+        //**
+        public void UpdateVehicleStatus(int i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
+            VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
+            if(vehicleInGarage != null)
+            {
+                vehicleInGarage.UpdateVehicleStatus(i_VehicleStatus);
+            }
 
         }
         
-        //to implement
+        //**
         public void InflameTires(int i_LicenseNumber)
         {
+            VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
+            if (vehicleInGarage != null)
+            {
+                vehicleInGarage.Vehicle.InflameTireToMax();
+            }
 
+        }
+
+        //to implement
+        public void RefuelVehicle(float i_ammountToRefeul, eFuelType i_FuelType, int i_LicenseNumber)
+        {
+            VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
+            if (vehicleInGarage != null)
+            {
+                vehicleInGarage.Vehicle.EnergyRefill(i_ammountToRefeul, i_FuelType);
+            }
         }
         
         //to implement
-        public void RefuelVehicle()
+        public void ChargeVehicle(float i_ammountToCharge, int i_LicenseNumber)
         {
-
-        }
-        
-        //to implement
-        public void ChargeVehicle()
-        {
-
+            VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
+            if (vehicleInGarage != null)
+            {
+                vehicleInGarage.Vehicle.EnergyRefill(i_ammountToCharge, eFuelType.electricty);
+            }
         }
         
         //to implement
@@ -81,17 +99,17 @@ namespace Ex03.GarageLogic
             return null;
         }
 
-        private Vehicle SearchVehicleByLicenseNumber(int i_LicenseNumber)
+        private VehicleInGarage SearchVehicleByLicenseNumber(int i_LicenseNumber)
         {
-            Vehicle vehicle = null;
-            foreach (VehicleInGarage vehicleInGarage in m_Vehicles)
+            VehicleInGarage vehicleInGarage = null;
+            foreach (VehicleInGarage vInGarage in m_VehiclesInGarage)
             {
                 if(vehicleInGarage.LicenseNumber == i_LicenseNumber)
                 {
-                    vehicle = vehicleInGarage.Vehicle;
+                    vehicleInGarage = vInGarage;
                 }
             }
-            return vehicle;
+            return vehicleInGarage;
         }
 
         //to implement
