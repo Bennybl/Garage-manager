@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex03.GarageLogic;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,21 +7,22 @@ namespace Ex03.ConsoleUI
 {
     class UI
     {
+        private static GarageManager s_MyGarage;
         private enum eUserChoice
         {
-            InsertNewVehicle = 1 ,
-            DisplayListOfVehicles = 2 ,
-            UpdateVehicleStatus = 3 ,
-            InflateTiresToMaximum = 4 ,
-            RefuelVehicle = 5 ,
-            ChargeElectricVehicle = 6 ,
-            DisplayVehicleInformation = 7 ,
+            InsertNewVehicle = 1,
+            DisplayListOfVehicles = 2,
+            UpdateVehicleStatus = 3,
+            InflateTiresToMaximum = 4,
+            RefuelVehicle = 5,
+            ChargeElectricVehicle = 6,
+            DisplayVehicleInformation = 7,
             Abort = 8
         }
 
         private enum eFilterMenu
         {
-            None = 1,
+            NoFilter = 1,
             InRepair = 2,
             Repaired = 3,
             Paid = 4
@@ -29,14 +31,14 @@ namespace Ex03.ConsoleUI
         public static void ExecutePrograms()
         {
             eUserChoice eUserChoice = eUserChoice.InsertNewVehicle;
-
+            GarageManager s_MyGarage = new GarageManager();
             while (eUserChoice != eUserChoice.Abort)
             {
                 eUserChoice = retrieveUserProgramSelection();
                 switch (eUserChoice)
                 {
                     case eUserChoice.InsertNewVehicle:
-                        initiateGame(o_ScreenSize, true);
+                        insertNewVehicle();
                         break;
                     case eUserChoice.DisplayListOfVehicles:
                         initiateGame(o_ScreenSize, false);
@@ -54,6 +56,10 @@ namespace Ex03.ConsoleUI
                         initiateGame(o_ScreenSize, false);
                         break;
                 }
+            }
+            if(eUserChoice == eUserChoice.Abort)
+            {
+                return;
             }
         }
 
@@ -92,5 +98,67 @@ Please choose which program you want to run:
 
             return eUserChoice;
         }
+
+        private static void insertNewVehicle()
+        {
+        }
+
+        private static void displayLicenseOfVehiclesInTheGarage()
+        {
+            List<string> listOfLicenseNumbersToDisplay = new List<string>();
+            eFilterMenu filterForDisplaying;
+            listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(filterForDisplaying);
+            int numberOfLicenseNumbersToDisplay = listOfLicenseNumbersToDisplay.Count;
+
+            while (true)
+            {
+                filterForDisplaying = retrieveUserFilterSelection();
+                break;
+            }
+                if (numberOfLicenseNumbersToDisplay == 0)
+            {
+                Console.WriteLine("No license numbers to display.");
+            }
+            else
+            {
+                Console.WriteLine("List of licenses (according to your filter option):");
+                foreach(string licencePlate in listOfLicenseNumbersToDisplay)
+                {
+                    Console.WriteLine(licencePlate);
+                }
+            }
+        }
+
+        private static void showFilterMenu()
+        {
+            string mainMenu = string.Format(
+@"Please choose a filter for :
+1. Display All - No Filter
+2. Vehicles in Repair
+3. Repaired Vehicles
+4. Payment Done");
+            Console.WriteLine(mainMenu);
+        }
+
+        private static eFilterMenu retrieveUserFilterSelection()
+        {
+            string inputFromUser;
+            eFilterMenu eFilterMenu;
+
+            showMainMenu();
+            inputFromUser = Console.ReadLine();
+            try
+            {
+                eFilterMenu = (eFilterMenu)int.Parse(inputFromUser);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return retrieveUserFilterSelection();
+            }
+
+            return eFilterMenu;
+        }
+
     }
 }
