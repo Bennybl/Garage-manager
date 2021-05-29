@@ -25,11 +25,23 @@ namespace Ex03.GarageLogic
         }
         
         //to implement
-        public void GetLicenseNumber()
+        public List<string> GetLicenseNumberByVehicleStatus(eVehicleStatus  i_VehicleStatus)
+        {
+            return null;
+        }
+
+        //to implement
+        public void getLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
 
         }
-        
+
+        //to implement
+        public void getLicenseNumber(eVehicleStatus i_VehicleStatus)
+        {
+
+        }
+
         //to implement
         public void UpdateVehicleStatus(int i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
