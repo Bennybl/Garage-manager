@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
+    //change openning char in private/protected method to lower. 
     public class GarageManager
     {
         private List<VehicleInGarage> m_Vehicles;
@@ -10,7 +11,6 @@ namespace Ex03.GarageLogic
         VehicleCreator m_CurrentVehicleCreation;
         Vehicle m_CurrentVehicle;
         Customer m_CurrentCustomer;
-
 
         public GarageManager()
         {
