@@ -7,7 +7,7 @@ namespace Ex03.ConsoleUI
 {
     class UI
     {
-        private static GarageManager s_MyGarage;
+        private GarageManager myGarage;
         private enum eUserChoice
         {
             InsertNewVehicle = 1,
@@ -20,19 +20,12 @@ namespace Ex03.ConsoleUI
             Abort = 8
         }
 
-        private enum eFilterMenu
-        {
-            NoFilter = 1,
-            InRepair = 2,
-            Repaired = 3,
-            Paid = 4
-        }
 
         public static void ExecutePrograms()
         {
             eUserChoice eUserChoice = eUserChoice.InsertNewVehicle;
-            GarageManager s_MyGarage = new GarageManager();
-            while (eUserChoice != eUserChoice.Abort)
+           myGarage = new GarageManager();
+            while (true)
             {
                 eUserChoice = retrieveUserProgramSelection();
                 switch (eUserChoice)
@@ -56,6 +49,7 @@ namespace Ex03.ConsoleUI
                         initiateGame(o_ScreenSize, false);
                         break;
                 }
+                break;
             }
             if(eUserChoice == eUserChoice.Abort)
             {
@@ -101,33 +95,35 @@ Please choose which program you want to run:
 
         private static void insertNewVehicle()
         {
+            Console.WriteLine("Please insert the vehicle license number");
+            string vehicleLicenseNumber = Console.ReadLine();
+
+            bool v = myGarage.InsertVehicle(32);
+            /// check input
+
+
         }
 
         private static void displayLicenseOfVehiclesInTheGarage()
         {
             List<string> listOfLicenseNumbersToDisplay = new List<string>();
-            eFilterMenu eFilterMenu;
-            int numberOfLicenseNumbersToDisplay = listOfLicenseNumbersToDisplay.Count;
-
+            eVehicleStatus eVehicleStatus;
+            int numberOfLicenseNumbersToDisplay;
+            
             while (true)
             {
-                eFilterMenu = retrieveUserFilterSelection();
-                switch (eFilterMenu)
+                eVehicleStatus = retrieveUserFilterSelection();
+                switch (eVehicleStatus)
                 {
-                    case eFilterMenu.NoFilter :
-                    case eFilterMenu.InRepair :
-                    case eFilterMenu.Repaired :
-                        listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(eFilterMenu);
+                    case eVehicleStatus.None :
+                    case eVehicleStatus.InRepair:
+                    case eVehicleStatus.Repaired :
+                        listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumberByVehicleStatus(eVehicleStatus);
                         break;
-                   // case eFilterMenu.InRepair:
-                     //   listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(eFilterMenu);
-                      //  break;
-                    //case eFilterMenu.Repaired:
-                       // listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(eFilterMenu);
-                     //   break;
                 }
+                break;
             }
-            
+            numberOfLicenseNumbersToDisplay = listOfLicenseNumbersToDisplay.Count;
             if (numberOfLicenseNumbersToDisplay == 0)
             {
                 Console.WriteLine("No license numbers to display.");
@@ -145,7 +141,7 @@ Please choose which program you want to run:
         private static void showFilterMenu()
         {
             string mainMenu = string.Format(
-@"Please choose a filter for :
+@"Please display the licence numbers by the following filter:
 1. Display All - No Filter
 2. Vehicles in Repair
 3. Repaired Vehicles
@@ -153,16 +149,16 @@ Please choose which program you want to run:
             Console.WriteLine(mainMenu);
         }
 
-        private static eFilterMenu retrieveUserFilterSelection()
+        private static eVehicleStatus retrieveUserFilterSelection()
         {
             string inputFromUser;
-            eFilterMenu eFilterMenu;
+            eVehicleStatus eVehicleStatus;
 
             showMainMenu();
             inputFromUser = Console.ReadLine();
             try
             {
-                eFilterMenu = (eFilterMenu)int.Parse(inputFromUser);
+                eVehicleStatus = (eVehicleStatus)int.Parse(inputFromUser);
             }
             catch (Exception ex)
             {
@@ -170,7 +166,7 @@ Please choose which program you want to run:
                 return retrieveUserFilterSelection();
             }
 
-            return eFilterMenu;
+            return eVehicleStatus;
         }
 
     }
