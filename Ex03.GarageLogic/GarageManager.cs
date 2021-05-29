@@ -80,21 +80,18 @@ namespace Ex03.GarageLogic
             
         }
 
-        
         private Vehicle CreateNewCar(int i_numOfDoors, eColor i_Color)
         {
             Vehicle vehicle = m_CurrentVehicleCreation.SetCarMaterials(i_Color, i_numOfDoors);
             return vehicle;
         }
 
-        
         private Vehicle CreateNewTruck(int i_MaxCapcity, bool i_isHavingDangerousMetrials)
         {
             Vehicle vehicle = m_CurrentVehicleCreation.SetTruckMaterials(i_MaxCapcity, i_isHavingDangerousMetrials);
             return vehicle;
         }
 
-        
         private Vehicle CreateNewMotorcycle(eLicenseType i_LicenseType, int i_EngineVolume)
         {
             Vehicle vehicle = m_CurrentVehicleCreation.SetMotorcycleMaterials(i_EngineVolume, i_LicenseType);
@@ -120,7 +117,6 @@ namespace Ex03.GarageLogic
 
             return null;
         }
-
 
     }
    
