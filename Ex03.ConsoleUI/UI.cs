@@ -106,16 +106,29 @@ Please choose which program you want to run:
         private static void displayLicenseOfVehiclesInTheGarage()
         {
             List<string> listOfLicenseNumbersToDisplay = new List<string>();
-            eFilterMenu filterForDisplaying;
-            listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(filterForDisplaying);
+            eFilterMenu eFilterMenu;
             int numberOfLicenseNumbersToDisplay = listOfLicenseNumbersToDisplay.Count;
 
             while (true)
             {
-                filterForDisplaying = retrieveUserFilterSelection();
-                break;
+                eFilterMenu = retrieveUserFilterSelection();
+                switch (eFilterMenu)
+                {
+                    case eFilterMenu.NoFilter :
+                    case eFilterMenu.InRepair :
+                    case eFilterMenu.Repaired :
+                        listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(eFilterMenu);
+                        break;
+                   // case eFilterMenu.InRepair:
+                     //   listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(eFilterMenu);
+                      //  break;
+                    //case eFilterMenu.Repaired:
+                       // listOfLicenseNumbersToDisplay = s_MyGarage.GetLicenseNumber(eFilterMenu);
+                     //   break;
+                }
             }
-                if (numberOfLicenseNumbersToDisplay == 0)
+            
+            if (numberOfLicenseNumbersToDisplay == 0)
             {
                 Console.WriteLine("No license numbers to display.");
             }
