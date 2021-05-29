@@ -51,9 +51,7 @@ namespace Ex03.GarageLogic
         internal Vehicle CreateVehicle()
         {
             Vehicle vehicle = null;
-            
-                            
-
+           
         switch (m_eVehicleType)
         {
             case eVehicleType.Car:

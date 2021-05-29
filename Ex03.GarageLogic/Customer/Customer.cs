@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    internal class Customer
+    internal struct Customer
     {
         private string m_CustomerPhone;
         private string m_CustomerName;
-        private List<VehicleInGarage> m_CustomerVehicles;
 
-        internal Customer(string i_CustomerName, string i_CustomerPhone, VehicleInGarage i_CustomerVehicle)
+        internal Customer(string i_CustomerName, string i_CustomerPhone)
         {
             m_CustomerPhone = i_CustomerPhone;
             m_CustomerName = i_CustomerName;
