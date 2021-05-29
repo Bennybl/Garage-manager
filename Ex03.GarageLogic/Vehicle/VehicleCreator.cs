@@ -13,8 +13,8 @@ namespace Ex03.GarageLogic
         private string m_ModelName;
 
         
-        private int m_EngineVolume;
-        private eLicenseType m_LicenseType;
+        ;
+        eLicenseType m_LicenseType;
         private eColor m_Color;
         private int m_numOfDoors;
         
@@ -55,23 +55,24 @@ namespace Ex03.GarageLogic
         {
             Vehicle vehicle = null;
            
-        switch (m_VehicleMetrials["VehicleType"])
+        switch (m_eVehicleType)
         {
-            
-
+           
             case eVehicleType.Car:
-                vehicle = new Car(, m_VehicleMetrials["numOfDoors"], m_VehicleMetrials["LicenceNumber"], m_VehicleMetrials["ModelName"]);
+                    int numOfDoors = (int)m_VehicleMetrials["NumOfDoors"];
+                    eColor color = (eColor)m_VehicleMetrials["Color"];
+                    vehicle = new Car(m_EngineBased, numOfDoors, color, m_LicenceNumber, m_ModelName);
                 break;
             
             case eVehicleType.Motorcycle:
-                bool isHavingDangerousMetrials = (bool)m_VehicleMetrials[""];
-                float maxCapcity = (float)m_VehicleMetrials[""];
-                vehicle = new Motorcycle(m_VehicleMetrials["EngineBased"], m_VehicleMetrials["LicenseType"], m_VehicleMetrials["EngineVolume"], m_VehicleMetrials["ModelName"]);
+                int engineVolume  = (int)m_VehicleMetrials["EngineVolume"];
+                eLicenseType licenseType = (eLicenseType)m_VehicleMetrials["LicenseType"];
+                vehicle = new Motorcycle(m_EngineBased, licenseType,engineVolume, m_LicenceNumber, m_ModelName   );
                 break;
             
             case eVehicleType.Truck:
-                bool isHavingDangerousMetrials = (bool)m_VehicleMetrials[""];
-                float maxCapcity = (float)m_VehicleMetrials[""];
+                bool isHavingDangerousMetrials = (bool)m_VehicleMetrials["IsHavingDangerousMetrials"];
+                float maxCapcity = (float)m_VehicleMetrials["MaxCapcity"];
                 vehicle = new Truck(m_EngineBased, maxCapcity, isHavingDangerousMetrials,m_LicenceNumber, m_ModelName);
                 break;
         }
