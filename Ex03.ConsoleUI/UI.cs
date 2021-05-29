@@ -24,7 +24,7 @@ namespace Ex03.ConsoleUI
         public static void ExecutePrograms()
         {
             eUserChoice eUserChoice = eUserChoice.InsertNewVehicle;
-           myGarage = new GarageManager();
+            myGarage = new GarageManager();
             while (true)
             {
                 eUserChoice = retrieveUserProgramSelection();
