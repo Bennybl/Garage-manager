@@ -7,12 +7,13 @@ namespace Ex03.GarageLogic
     //
     public class GarageManager
     {
-        private List<VehicleInGarage> m_Vehicles;
+        private List<VehicleInGarage> m_VehiclesInGarage;
         private List<Customer> m_Customers;
         VehicleCreator m_CurrentVehicleCreation;
         Vehicle m_CurrentVehicle;
         Customer m_CurrentCustomer;
 
+        
         public GarageManager()
         {
             m_Vehicles = new List<VehicleInGarage>();
@@ -20,13 +21,20 @@ namespace Ex03.GarageLogic
         }
 
         //to implement
-        public void insertCar(int i_LicenseNumber)
+        public bool insertCar(int i_LicenseNumber)
         {
-
+            bool isVehicleInGarage = false;
+            if(SearchVehicleByLicenseNumber(i_LicenseNumber) == null)
+            {
+                updateVehicleStatus(i_LicenseNumber , eVehicleStatus.InRepair);
+                return isVehicleInGarage;
+            }
+            isVehicleInGarage = true;
+            return isVehicleInGarage;
         }
         
         //to implement
-        public List<string> GetLicenseNumberByVehicleStatus(eVehicleStatus  i_VehicleStatus)
+        public List<string> GetLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
             return null;
         }
@@ -44,7 +52,7 @@ namespace Ex03.GarageLogic
         }
 
         //to implement
-        public void UpdateVehicleStatus(int i_LicenseNumber, eVehicleStatus i_VehicleStatus)
+        private void updateVehicleStatus(int i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
 
         }
