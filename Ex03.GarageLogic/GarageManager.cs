@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Ex03.GarageLogic
 {
     //change openning char in private/protected method to lower. 
+    //
     public class GarageManager
     {
         private List<VehicleInGarage> m_Vehicles;
@@ -31,13 +32,13 @@ namespace Ex03.GarageLogic
         }
 
         //to implement
-        public void getLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
+        private void getLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
 
         }
 
         //to implement
-        public void getLicenseNumber(eVehicleStatus i_VehicleStatus)
+        private void getLicenseNumber(eVehicleStatus i_VehicleStatus)
         {
 
         }
@@ -122,13 +123,7 @@ namespace Ex03.GarageLogic
             return null;
         }
         
-        //to implement
-        private List<string> GetVehicleLicenseNumberByStatus(eVehicleStatus i_VehicleStatus)
-        {
-            List<string> sortedVehicls = new List<string>();
-
-            return null;
-        }
+ 
 
     }
    
