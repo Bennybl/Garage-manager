@@ -20,16 +20,16 @@ namespace Ex03.GarageLogic
             m_Customers = new List<Customer>();
         }
 
-        //to implement
-        public bool insertCar(int i_LicenseNumber)
+        
+        public bool InsertVehicle(int i_LicenseNumber)
         {
-            bool isVehicleInGarage = false;
-            if(SearchVehicleByLicenseNumber(i_LicenseNumber) == null)
+            bool isVehicleInGarage = true;
+            if(SearchVehicleByLicenseNumber(i_LicenseNumber) != null)
             {
                 updateVehicleStatus(i_LicenseNumber , eVehicleStatus.InRepair);
-                return isVehicleInGarage;
+                isVehicleInGarage = false;
             }
-            isVehicleInGarage = true;
+            
             return isVehicleInGarage;
         }
         
