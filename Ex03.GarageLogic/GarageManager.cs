@@ -15,7 +15,6 @@ namespace Ex03.GarageLogic
         Vehicle m_CurrentVehicle;
         Customer m_CurrentCustomer;
 
-        
         public GarageManager()
         {
             m_VehiclesInGarage = new List<VehicleInGarage>();
@@ -33,26 +32,51 @@ namespace Ex03.GarageLogic
             
             return isVehicleInGarage;
         }
-        
-        //to implement
+               
         public List<string> GetLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
-            return null;
+            List<string> licenseNumberList;
+            if(i_VehicleStatus != eVehicleStatus.None)
+            {
+                licenseNumberList = getLicenseNumberByVehicleStatus(i_VehicleStatus);
+            }
+            else
+            {
+                licenseNumberList = getLicenseNumber();
+            }
+
+            return licenseNumberList;
         }
 
-        //to implement
-        private void getLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
+        private List<string> getLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
+            List<string> licenseNumberList = new  List<string>();
 
+            foreach(VehicleInGarage vehicleInGarage in m_VehiclesInGarage)
+            {
+                if(vehicleInGarage.VehicleStatus == i_VehicleStatus)
+                {
+                    licenseNumberList.Add(vehicleInGarage.LicenseNumber);
+                }
+            }
+
+            return licenseNumberList;
         }
-
-        //**
-        private void getLicenseNumber(eVehicleStatus i_VehicleStatus)
+ 
+        private List<string> getLicenseNumber()
         {
+            List<string> licenseNumberList = new List<string>();
 
+            foreach (VehicleInGarage vehicleInGarage in m_VehiclesInGarage)
+            {
+               
+                    licenseNumberList.Add(vehicleInGarage.LicenseNumber);
+                
+            }
+
+            return licenseNumberList;
         }
 
-        //**
         public void UpdateVehicleStatus(string i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
@@ -62,8 +86,7 @@ namespace Ex03.GarageLogic
             }
 
         }
-        
-        //**
+                
         public void InflameTires(string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
@@ -73,8 +96,7 @@ namespace Ex03.GarageLogic
             }
 
         }
-
-        //to implement
+        
         public void RefuelVehicle(float i_ammountToRefeul, eFuelType i_FuelType, string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
@@ -83,8 +105,7 @@ namespace Ex03.GarageLogic
                 vehicleInGarage.Vehicle.EnergyRefill(i_ammountToRefeul, i_FuelType);
             }
         }
-        
-        //to implement
+                
         public void ChargeVehicle(float i_ammountToCharge, string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
