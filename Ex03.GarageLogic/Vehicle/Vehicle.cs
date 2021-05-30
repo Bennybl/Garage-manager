@@ -29,6 +29,9 @@ namespace Ex03.GarageLogic
             get { return m_LicenceNumber; }
         }
 
-
+        public override string ToString()
+        {
+            return String.Format("{0} Model Name: {1} Tires {2}", m_Engine.ToString(), m_ModelName, m_VehicleTire[0].ToString());
+        }
     }
 }

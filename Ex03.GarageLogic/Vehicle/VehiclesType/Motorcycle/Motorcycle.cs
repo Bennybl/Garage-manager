@@ -14,15 +14,28 @@ namespace Ex03.GarageLogic
 
         internal Motorcycle(eEngineBased i_VehicleType, eLicenseType i_LicenseType, int i_EngineVolume, string i_LicenceNumber, string i_ModelName)
         {
-            m_LicenseType = i_LicenseType;
-            m_EngineVolume = i_EngineVolume;
-            m_EngineBased = i_VehicleType;
-            m_LicenceNumber = i_LicenceNumber;
-            m_ModelName = i_ModelName;
-            SetVehicleType();
 
+            if (isValidInput(i_LicenseType))
+            {
+                m_LicenseType = i_LicenseType;
+                m_EngineVolume = i_EngineVolume;
+                m_EngineBased = i_VehicleType;
+                m_LicenceNumber = i_LicenceNumber;
+                m_ModelName = i_ModelName;
+                SetVehicleType();
+            }
+            else
+            {
+                throw new WrongVehicleInputExeption("Lisence tyoe should be: AA, BB, B1, A");
+            }
         }
 
+        private bool isValidInput(eLicenseType i_LicenseType)
+        {
+            bool licenseType = Enum.IsDefined(typeof(eLicenseType), i_LicenseType);
+
+            return licenseType;
+        }
         internal override void SetVehicleType()
         {
             if (m_EngineBased == eEngineBased.Electricty)
@@ -79,7 +92,7 @@ namespace Ex03.GarageLogic
         //to implement
         public override string ToString()
         {
-            return "";
+            return String.Format("{0} License type: {1}  Engine volume: {2}", base.ToString(), m_LicenseType, m_EngineVolume);
         }
     }
 }
