@@ -121,7 +121,7 @@ namespace Ex03.GarageLogic
             VehicleInGarage vehicleInGarage = null;
             foreach (VehicleInGarage vInGarage in m_VehiclesInGarage)
             {
-                if(vehicleInGarage.LicenseNumber == i_LicenseNumber)
+                if(vInGarage.LicenseNumber == i_LicenseNumber)
                 {
                     vehicleInGarage = vInGarage;
                 }

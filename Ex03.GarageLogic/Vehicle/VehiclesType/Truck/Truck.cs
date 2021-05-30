@@ -20,6 +20,7 @@ namespace Ex03.GarageLogic
             m_LicenceNumber = i_LicenceNumber;
             m_ModelName = i_ModelName;
             SetVehicleType();
+            SetTires();
         }
 
         internal override void SetVehicleType()
@@ -31,6 +32,7 @@ namespace Ex03.GarageLogic
         
         internal override void SetTires()
         {
+            m_VehicleTire = new List<Tire>();
             for (int i = 0; i < sr_NumOfTires; i++)
             {
                 m_VehicleTire.Add(new Tire(sr_MaxTirePressure / 2, sr_MaxTirePressure));
