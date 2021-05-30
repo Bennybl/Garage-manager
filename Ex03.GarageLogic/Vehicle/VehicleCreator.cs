@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         private eVehicleType m_eVehicleType;
         private string m_LicenceNumber;
         private string m_ModelName;
-        private Veicle m_CurrentVehicle;
+        private Vehicle m_CurrentVehicle;
 
         internal VehicleCreator(Dictionary<string, Object> i_VehicleMetrials)
         {

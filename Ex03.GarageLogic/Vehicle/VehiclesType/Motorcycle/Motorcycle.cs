@@ -12,7 +12,6 @@ namespace Ex03.GarageLogic
         internal static readonly int sr_NumOfTires = 2;
         internal static readonly float sr_MaxTirePressure = 30f;
 
-
         internal Motorcycle(eEngineBased i_VehicleType, eLicenseType i_LicenseType, int i_EngineVolume, string i_LicenceNumber, string i_ModelName)
         {
             m_LicenseType = i_LicenseType;

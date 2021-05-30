@@ -19,7 +19,6 @@ namespace Ex03.GarageLogic
             m_Vehicle = i_Vehicle;
         }
 
-
         internal int LicenseNumber
         {
             get { return m_LicenseNumber; }

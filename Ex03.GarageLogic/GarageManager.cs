@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         
         public GarageManager()
         {
-            m_Vehicles = new List<VehicleInGarage>();
+            m_VehiclesInGarage = new List<VehicleInGarage>();
             m_Customers = new List<Customer>();
         }
 
@@ -115,10 +115,10 @@ namespace Ex03.GarageLogic
         }
 
         //to implement
-        private void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials;)
+        private void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials)
         {
             VehicleCreator vehicleCreatorObject = new VehicleCreator(i_VehicleMetrials);
-            Veihcle vehicle = vehicleCreatorObject.Vehicle();
+            Vehicle vehicle = vehicleCreatorObject.Vehicle;
             
         }
 
@@ -152,8 +152,6 @@ namespace Ex03.GarageLogic
             return null;
         }
         
- 
-
     }
    
 }
