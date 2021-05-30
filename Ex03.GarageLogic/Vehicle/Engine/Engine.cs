@@ -16,13 +16,13 @@ namespace Ex03.GarageLogic
             set { m_MaximumEnergy = value; }
             get { return m_MaximumEnergy; }
         }
+
         internal float CurrentEnergy
         {
             set { m_CurrentEnergy = value; }
             get { return m_CurrentEnergy; }
         }
 
-        //Exeption to implement
         internal void EnergyRefil(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
         {
 
@@ -40,8 +40,6 @@ namespace Ex03.GarageLogic
             }
 
         }
-
-
 
         internal void EnergyRefilToMax()
         {

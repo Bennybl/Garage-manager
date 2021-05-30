@@ -131,6 +131,10 @@ namespace Ex03.GarageLogic
                     vehicleInGarage = vInGarage;
                 }
             }
+            if (vehicleInGarage == null)
+            {
+                throw new VehicleNotInGarageException();
+            }
             return vehicleInGarage;
         }
 
