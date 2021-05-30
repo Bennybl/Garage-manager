@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Ex03.ConsoleUI
 {
     class UI
@@ -23,38 +24,8 @@ namespace Ex03.ConsoleUI
 
         public void ExecutePrograms()
         {
-            eUserChoice eUserChoice = eUserChoice.InsertNewVehicle;
             myGarage = new GarageManager();
-            while (true)
-            {
-                eUserChoice = retrieveUserProgramSelection();
-                switch (eUserChoice)
-                {
-                    case eUserChoice.InsertNewVehicle:
-                        insertNewVehicle(myGarage);
-                        break;
-                    case eUserChoice.DisplayListOfVehicles:
-                        initiateGame(o_ScreenSize, false);
-                        break;
-                    case eUserChoice.UpdateVehicleStatus:
-                        initiateGame(o_ScreenSize, false);
-                        break;
-                    case eUserChoice.InflateTiresToMaximum:
-                        initiateGame(o_ScreenSize, false);
-                        break;
-                    case eUserChoice.ChargeElectricVehicle:
-                        initiateGame(o_ScreenSize, false);
-                        break;
-                    case eUserChoice.DisplayVehicleInformation:
-                        initiateGame(o_ScreenSize, false);
-                        break;
-                }
-                break;
-            }
-            if (eUserChoice == eUserChoice.Abort)
-            {
-                return;
-            }
+            executeUserProgramSelection();
         }
 
         private static void showMainMenu()
@@ -93,9 +64,208 @@ Please choose which program you want to run:
             return eUserChoice;
         }
 
+        private void executeUserProgramSelection()
+        {
+            eUserChoice eUserChoice = eUserChoice.InsertNewVehicle;
+            while (true)
+            {
+                eUserChoice = retrieveUserProgramSelection();
+                switch (eUserChoice)
+                {
+                    case eUserChoice.InsertNewVehicle:
+                        insertNewVehicle();
+                        break;
+                    case eUserChoice.DisplayListOfVehicles:
+                        displayLicenseOfVehiclesInTheGarage();
+                        break;
+                    case eUserChoice.UpdateVehicleStatus:
+                        updateVehicleStatusInGarage();
+                        break;
+                    case eUserChoice.InflateTiresToMaximum:
+                        inflateTiresToMaximum();
+                        break;
+                    case eUserChoice.ChargeElectricVehicle:
+
+                        break;
+                    case eUserChoice.DisplayVehicleInformation:
+
+                        break;
+                }
+                break;
+            }
+            if (eUserChoice == eUserChoice.Abort)
+            {
+                return;
+            }
+        }
+
+        private static void showEngineTypeMenu()
+        {
+            string engineMenu = string.Format(
+@"What type of engine is in your vehicle:
+1. Fuel Based Engine
+2. Electric Based Engine ");
+            Console.WriteLine(engineMenu);
+        }
+
+        private static eEngineBased retrieveEngineTypeFromUser()
+        {
+            string inputFromUser;
+            eEngineBased eEngineBased;
+
+            showEngineTypeMenu();
+            inputFromUser = Console.ReadLine();
+            try
+            {
+                eEngineBased = (eEngineBased)int.Parse(inputFromUser);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return retrieveEngineTypeFromUser();
+            }
+
+            return eEngineBased;
+        }
+        private static void showFuelBasedVehiclesMenu()
+        {
+            string vehicleType = string.Format(
+@"please choose type of vehicle:
+1. Car
+2. Motorcycle 
+3. Truck");
+            Console.WriteLine(vehicleType);
+        }
+
+        private static void showElectricBasedVehiclesMenu()
+        {
+            string vehicleType = string.Format(
+@"please choose type of vehicle:
+1. Car
+2. Motorcycle");
+            Console.WriteLine(vehicleType);
+        }
+
+        private static eVehicleType retrieveVehicelType(eEngineBased eEngineBased)
+        {
+            string inputFromUser;
+            eVehicleType eVehicleType;
+            int vehicleType;
+
+            if (eEngineBased == eEngineBased.Electricty)
+            {
+                showElectricBasedVehiclesMenu();
+            }
+            else
+            {
+                showFuelBasedVehiclesMenu();
+            }
+
+            inputFromUser = Console.ReadLine();
+            try
+            {
+                vehicleType = int.Parse(inputFromUser);
+                eVehicleType = (eVehicleType)vehicleType;
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return retrieveVehicelType(eEngineBased);
+            }
+            if (eEngineBased == eEngineBased.Electricty && vehicleType != 1 && vehicleType != 2)
+            {
+                Console.WriteLine("wrong input please try again:");
+                return retrieveVehicelType(eEngineBased);
+            }
+            return eVehicleType;
+        }
+
+        private static string getVehicleModelFromUser()
+        {
+            Console.WriteLine("Please enter model number:");
+            string inputModelFromUser = Console.ReadLine();
+
+            return inputModelFromUser;
+        }
+
+        private void newCustomer(out string o_CustomerName, out string o_CustomerPhone)
+        {
+            o_CustomerName = getCustomerNameFromUser();
+            o_CustomerPhone = getCustomerPhoneFromUser();
+        }
+
+        private static bool isOnlyLetters(string inputString)
+        {
+            bool isValidInput = true;
+            foreach (char c in inputString)
+            {
+                if (!Char.IsLetter(c))
+                {
+                    isValidInput = false;
+                    break;
+                }
+            }
+
+            return isValidInput;
+        }
+
+        private static string getCustomerNameFromUser()
+        {
+            bool isValidFirstName = true;
+            bool isValidLastName = true;
+            bool isValidInput = false;
+            string inputStringFromUser = string.Empty;
+
+            while (!isValidInput)
+            {
+                Console.WriteLine("Please enter your full name (first and last name\n");
+                inputStringFromUser = Console.ReadLine();
+                string[] firstAndLastName = inputStringFromUser.Split(',');
+                if (firstAndLastName.Length == 2)
+                {
+                    isValidFirstName = isOnlyLetters(firstAndLastName[0]);
+                    isValidLastName = isOnlyLetters(firstAndLastName[1]);
+                    isValidInput = isValidFirstName && isValidLastName; 
+                }
+
+                Console.WriteLine("The input you entered is invalid. Please try again.\n");
+            }
+            return inputStringFromUser;
+        }
+
+        private static string getCustomerPhoneFromUser()
+        {
+            bool isValidInput = true;
+
+            while (true)
+            {
+                if (!isValidInput)
+                {
+                    Console.WriteLine("The input you entered is invalid. Please try again.\n");
+                }
+
+                Console.WriteLine("Please enter 10 digit cell phone number");
+                string inputNumberFromUser = Console.ReadLine();
+                isValidInput = int.TryParse(inputNumberFromUser, out int o_CustomerPhoneNumber);
+                if (isValidInput && inputNumberFromUser.Length == 10 && inputNumberFromUser[0] == '0')
+                {
+                    return inputNumberFromUser;
+                }
+
+                isValidInput = false;
+            }
+        }
+
         private void insertNewVehicle()
         {
-            bool isVehicleNewInGarage = myGarage.InsertVehicle(getVehicleNumberFromUser());
+            string VehicleNumberFromUser = getLicenceNumberFromUser();
+            string o_CustomerName = string.Empty;
+            string o_CustomerPhone = string.Empty;
+
+            bool isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);
+            eEngineBased eEngineBased;
+            Dictionary<string, object> i_vehicleProperties = new Dictionary<string, object>();
+            //benny shouldchange the method name to isInGarage
             if (!isVehicleNewInGarage)
             {
                 string vehicleAlreadyInGarage = string.Format(
@@ -103,19 +273,29 @@ Please choose which program you want to run:
 registered with the given licence number is already in our garage in repair");
                 Console.WriteLine(vehicleAlreadyInGarage);
             }
-            // GET engine type 
-            // Get vehicle type
-            // get model
-            //to ask for tire details?
-            //What parameters to ask from user
 
+            while (true)
+            {
+                eEngineBased = retrieveEngineTypeFromUser();
+                switch (eEngineBased)
+                {
+                    case eEngineBased.FuelBased:
+                    case eEngineBased.Electricty:
+                        break;
+                }
+                break;
+            }
+            newCustomer(out o_CustomerName, out o_CustomerPhone);
+            i_vehicleProperties.Add("EngineBased", eEngineBased);
+            i_vehicleProperties.Add("VehicleType", retrieveVehicelType(eEngineBased));
+            i_vehicleProperties.Add("ModelName", getVehicleModelFromUser());
+            i_vehicleProperties.Add("LicenceNumber", VehicleNumberFromUser);
 
-            /// check input
-
+            myGarage.InsertNewVehicleIntoGarage(i_vehicleProperties, o_CustomerName, o_CustomerPhone);
 
         }
 
-        private static int getVehicleNumberFromUser()
+        private static string getLicenceNumberFromUser()
         {
             bool isValidInput = true;
 
@@ -129,14 +309,15 @@ registered with the given licence number is already in our garage in repair");
                 Console.WriteLine("Please enter Israeli license number");
                 string inputNumberFromUser = Console.ReadLine();
                 isValidInput = int.TryParse(inputNumberFromUser, out int o_VehicleLicenceNumber);
-                if (isValidInput && o_VehicleLicenceNumber == 7)
+                if (isValidInput && inputNumberFromUser.Length == 7)
                 {
-                    return o_VehicleLicenceNumber;
+                    return inputNumberFromUser;
                 }
 
                 isValidInput = false;
             }
         }
+
         private void displayLicenseOfVehiclesInTheGarage()
         {
             List<string> listOfLicenseNumbersToDisplay = new List<string>();
@@ -232,7 +413,7 @@ registered with the given licence number is already in our garage in repair");
                 {
                     case eVehicleStatus.InRepair:
                     case eVehicleStatus.Repaired:
-                        
+                        myGarage.UpdateVehicleStatus();
                         // update vehicle status
                         break;
                 }

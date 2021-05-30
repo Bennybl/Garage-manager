@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    enum eVehicleType
+    public enum eVehicleType
     {
-        Car,
-        Motorcycle,
-        Truck
+        Car = 1,
+        Motorcycle = 2,
+        Truck = 3,
     }
 }

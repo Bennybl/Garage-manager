@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    enum eEngineBased
+    public enum eEngineBased
     {
         FuelBased = 1,
         Electricty = 2
