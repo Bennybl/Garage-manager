@@ -87,6 +87,9 @@ Please choose which program you want to run:
                     case eUserChoice.ChargeElectricVehicle:
                         chargeVehicle();
                         break;
+                    case eUserChoice.RefuelVehicle:
+                        refuelVehicle();
+                        break;
                     case eUserChoice.DisplayVehicleInformation:
                         displayVehicleInformation();
                         break;
@@ -450,7 +453,7 @@ registered with the given licence number is already in our garage in repair");
 
         }
 
-        private void RefuelVehicle()
+        private void refuelVehicle()
         {
             string vehicleNum = getLicenceNumberFromUser();
             float amountToRefuel;
