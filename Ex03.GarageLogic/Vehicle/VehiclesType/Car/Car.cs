@@ -45,14 +45,14 @@ namespace Ex03.GarageLogic
         {
             if(m_EngineBased == eEngineBased.Electricty)
             {
-                ElectrictyBasedEngine m_Engine = new ElectrictyBasedEngine();
+                m_Engine = new ElectrictyBasedEngine();
                 m_Engine.MaximumEnergy = 3.2f;
                 m_Engine.m_FuelType = eFuelType.electricty;
                 
             }
             else
             {
-                FuelBasedEngine m_Engine = new FuelBasedEngine();
+                m_Engine = new FuelBasedEngine();
                 m_Engine.MaximumEnergy = 45f;
                 m_Engine.m_FuelType = eFuelType.Octan95;
             }
@@ -108,7 +108,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("{0} Color: {1} Number of doors: {2}", base.ToString(), m_Color, m_numOfDoors);
+            return String.Format("{0}, Color: {1}, Number of doors: {2}", base.ToString(), m_Color, m_numOfDoors);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("License number: {0} Vehicle owener: {1} Vehicle status: {2} {3}", m_LicenseNumber, m_VehicleOwener, m_VehicleStatus, Vehicle.ToString());
+            return String.Format("License number: {0}, Vehicle owener dedails: {1}, Vehicle status: {2}, {3}", m_LicenseNumber, m_VehicleOwener.CustomerDedails, m_VehicleStatus, Vehicle.ToString());
         }
     }
 }

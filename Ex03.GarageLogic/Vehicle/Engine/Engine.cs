@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("Eneing Based: {0} Current amount of energy: {1} Maximum of energy capcity: {2}",m_FuelType, m_CurrentEnergy, m_MaximumEnergy);
+            return String.Format("Eneing Based: {0}, Current amount of energy: {1}, Maximum of energy capcity: {2}",m_FuelType, m_CurrentEnergy, m_MaximumEnergy);
         }
     }
 }

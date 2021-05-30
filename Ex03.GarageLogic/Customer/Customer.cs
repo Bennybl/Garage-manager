@@ -24,6 +24,11 @@ namespace Ex03.GarageLogic
         {
             get { return m_CustomerPhone; }
         }
+
+        internal string CustomerDedails
+        {
+            get { return string.Format("Name - {0}, Phone - {1}", m_CustomerName, m_CustomerPhone); }
+        }
     }
 
 }
