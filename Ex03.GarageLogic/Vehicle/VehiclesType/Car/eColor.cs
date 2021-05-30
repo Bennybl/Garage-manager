@@ -6,9 +6,9 @@ namespace Ex03.GarageLogic
 {
     public enum eColor
     {
-        Black,
-        White,
-        Silver,
-        Red 
+        Black = 1,
+        White = 2,
+        Silver = 3,
+        Red = 4 
     }
 }

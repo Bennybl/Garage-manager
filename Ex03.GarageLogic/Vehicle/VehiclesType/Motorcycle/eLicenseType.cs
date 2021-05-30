@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    enum eLicenseType
+    public enum eLicenseType
     {
         AA = 1,
         BB = 2,

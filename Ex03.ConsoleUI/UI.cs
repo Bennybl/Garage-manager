@@ -295,13 +295,19 @@ Please choose which program you want to run:
                     {
                         case eVehicleType.Car:
                             i_vehicleProperties.Add("VehicleType", eVehicleType);
-                            i_vehicleProperties.Add("NumOfDoors", eNum);
+                            i_vehicleProperties.Add("NumOfDoors", retrieveNumberOfDoors());
+                            i_vehicleProperties.Add("Color", retrieveColor());
                             break;
                         case eVehicleType.Motorcycle:
                             i_vehicleProperties.Add("VehicleType", eVehicleType);
+                            i_vehicleProperties.Add("EngineVolume", getEngineVolume());
+                            i_vehicleProperties.Add("LicenceType", retrieveLicenceType());
                             break;
                         case eVehicleType.Truck:
                             i_vehicleProperties.Add("VehicleType", eVehicleType);
+                            i_vehicleProperties.Add("IsHavingDangerousMetrials", checkIfDangerousMaterials());
+                            i_vehicleProperties.Add("MaxCapcity", getMaxCapacity());
+
                             break;
                     }
                     break;
@@ -318,6 +324,169 @@ Please choose which program you want to run:
 registered with the given licence number is already in our garage in repair");
                 Console.WriteLine(vehicleAlreadyInGarage);
             }
+        }
+
+        private static float getMaxCapacity()
+        {
+            bool isValid = false;
+            float o_MaxCapacity = 0;
+            while (!isValid)
+            {
+                Console.WriteLine("Please insert the max capacity:");
+                string inputFromUser = Console.ReadLine();
+                isValid = float.TryParse(inputFromUser, out o_MaxCapacity);
+                if (isValid && o_MaxCapacity > 0)
+                {
+                    isValid = true;
+                    break;
+                }
+                Console.WriteLine("Illegal input please try again:");
+            }
+
+            return o_MaxCapacity;
+        }
+
+        private static bool checkIfDangerousMaterials()
+        {
+            bool carryDangerousMaterials = true;
+            bool isValid = false;
+            string msg = string.Format(
+@"Does the truck carry dangerous materials:
+1. Yes
+2. No");
+            while (!isValid)
+            {
+                Console.WriteLine(msg);
+                string userInput = Console.ReadLine();
+                if (userInput == "1")
+                {
+                    carryDangerousMaterials = true;
+                    isValid = true;
+                    break;
+                }
+                else if (userInput == "2")
+                {
+                    carryDangerousMaterials = false;
+                    isValid = true;
+                    break;
+                }
+
+               Console.WriteLine("Inalid input you can press either 1 or 2");
+            }
+
+            return carryDangerousMaterials;
+        }
+        private static void showMotorLicenceTypeMenu()
+        {
+            string mainMenu = string.Format(
+@"Please press the number corresponding to your licence type:
+1. AA
+2. BB
+3. B1
+4. A");
+            Console.WriteLine(mainMenu);
+        }
+
+        private static eLicenseType retrieveLicenceType()
+        {
+            string inputFromUser;
+            eLicenseType eLicenseType;
+
+            showColorMenu();
+            inputFromUser = Console.ReadLine();
+            try
+            {
+                eLicenseType = (eLicenseType)int.Parse(inputFromUser);
+            }
+            catch
+            {
+                Console.WriteLine("Illegal input please try again");
+                return retrieveLicenceType();
+            }
+
+            return eLicenseType;
+        }
+
+        private static int getEngineVolume()
+        {
+            bool isValid = false;
+            int o_EngineVolume = 0;
+            while (!isValid)
+            {
+                Console.WriteLine("Please insert the engine's volume:");
+                string inputFromUser = Console.ReadLine();
+                isValid = int.TryParse(inputFromUser, out o_EngineVolume);
+                if (isValid && o_EngineVolume > 0)
+                {
+                    isValid = true;
+                    break;
+                }
+                Console.WriteLine("Illegal input please try again:");
+            }
+
+            return o_EngineVolume;
+        }
+
+        private static void showNumOfDoorsMenu()
+        {
+            string mainMenu = string.Format(
+@"Please enter number of doors:
+2. Two doors
+3. Three doors
+4. Four doors
+5. Five doors");
+            Console.WriteLine(mainMenu);
+        }
+
+        private static eNumOfDoors retrieveNumberOfDoors()
+        {
+            string inputFromUser;
+            eNumOfDoors eNumOfDoors;
+
+            showNumOfDoorsMenu();
+            inputFromUser = Console.ReadLine();
+            try
+            {
+                eNumOfDoors = (eNumOfDoors)int.Parse(inputFromUser);
+            }
+            catch
+            {
+                Console.WriteLine("Illegal input please try again");
+                return retrieveNumberOfDoors();
+            }
+
+            return eNumOfDoors;
+        }
+
+        private static void showColorMenu()
+        {
+            string mainMenu = string.Format(
+@"Please enter color:
+1. Black
+2. White
+3. Silver
+4. Red");
+            Console.WriteLine(mainMenu);
+        }
+
+        private static eColor retrieveColor()
+        {
+            string inputFromUser;
+            eColor eColor;
+
+            showColorMenu();
+            inputFromUser = Console.ReadLine();
+            try
+            {
+                eColor = (eColor)int.Parse(inputFromUser);
+            }
+            catch
+            {
+                Console.WriteLine("Illegal input please try again");
+                return retrieveColor();
+            }
+
+            return eColor;
         }
 
         private static string getLicenceNumberFromUser()
