@@ -4,8 +4,6 @@ using System.Collections.Generic;
 namespace Ex03.GarageLogic
 {
     //change openning char in private/protected method to lower. 
-    //change refill in abstract
-    //Exeptions
     
     public class GarageManager
     {
@@ -115,10 +113,15 @@ namespace Ex03.GarageLogic
             }
         }
         
-        //to implement
         public string GetVehicleInformation(string i_LicenseNumber)
         {
-            return null;
+            string vehicleInfo = "";
+            VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
+            if(vehicleInGarage != null)
+            {
+                vehicleInfo = vehicleInGarage.ToString();
+            }
+            return vehicleInfo;
         }
 
         private VehicleInGarage SearchVehicleByLicenseNumber(string i_LicenseNumber)
