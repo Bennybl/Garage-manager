@@ -261,39 +261,63 @@ Please choose which program you want to run:
             string o_CustomerName = string.Empty;
             string o_CustomerPhone = string.Empty;
             eEngineBased eEngineBased;
+            eVehicleType eVehicleType;
+            bool isVehicleNewInGarage = true;
             Dictionary<string, object> i_vehicleProperties = new Dictionary<string, object>();
             try
             {
-                bool isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);   
+                isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);
                 //benny shouldchange the method name to isInGarage
             }
-            catch(VehicleNotInGarageException ex)
+            catch (VehicleNotInGarageException ex)
             {
-                    string vehicleAlreadyInGarage = string.Format(
-    @"Error according to our system the vehicle
-registered with the given licence number is already in our garage in repair");
-                    Console.WriteLine(vehicleAlreadyInGarage);
-                
-            }
-            while (true)
-            {
-                eEngineBased = retrieveEngineTypeFromUser();
-                switch (eEngineBased)
+                while (true)
                 {
-                    case eEngineBased.FuelBased:
-                    case eEngineBased.Electricty:
-                        break;
+                    eEngineBased = retrieveEngineTypeFromUser();
+                    switch (eEngineBased)
+                    {
+                        case eEngineBased.FuelBased:
+                        case eEngineBased.Electricty:
+                            break;
+                    }
+                    break;
                 }
-                break;
-            }
-            
-            i_vehicleProperties.Add("EngineBased", eEngineBased);
-            i_vehicleProperties.Add("VehicleType", retrieveVehicelType(eEngineBased));
-            i_vehicleProperties.Add("ModelName", getVehicleModelFromUser());
-            i_vehicleProperties.Add("LicenceNumber", VehicleNumberFromUser);
-            newCustomer(out o_CustomerName, out o_CustomerPhone);
-            myGarage.InsertNewVehicleIntoGarage(i_vehicleProperties, o_CustomerName, o_CustomerPhone);
 
+                i_vehicleProperties.Add("EngineBased", eEngineBased);
+                i_vehicleProperties.Add("ModelName", getVehicleModelFromUser());
+                i_vehicleProperties.Add("LicenceNumber", VehicleNumberFromUser);
+
+                while (true)
+                {
+                    eVehicleType = retrieveVehicelType(eEngineBased);
+
+                    switch (eVehicleType)
+                    {
+                        case eVehicleType.Car:
+                            i_vehicleProperties.Add("VehicleType", eVehicleType);
+                            i_vehicleProperties.Add("NumOfDoors", eNum);
+                            break;
+                        case eVehicleType.Motorcycle:
+                            i_vehicleProperties.Add("VehicleType", eVehicleType);
+                            break;
+                        case eVehicleType.Truck:
+                            i_vehicleProperties.Add("VehicleType", eVehicleType);
+                            break;
+                    }
+                    break;
+                }
+
+                
+                newCustomer(out o_CustomerName, out o_CustomerPhone);
+                myGarage.InsertNewVehicleIntoGarage(i_vehicleProperties, o_CustomerName, o_CustomerPhone);
+            }
+            if (!isVehicleNewInGarage)
+            {
+                string vehicleAlreadyInGarage = string.Format(
+        @"Error according to our system the vehicle
+registered with the given licence number is already in our garage in repair");
+                Console.WriteLine(vehicleAlreadyInGarage);
+            }
         }
 
         private static string getLicenceNumberFromUser()
