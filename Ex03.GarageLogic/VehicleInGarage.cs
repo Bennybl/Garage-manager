@@ -34,6 +34,7 @@ namespace Ex03.GarageLogic
         {
             get { return m_VehicleStatus; }
         }
+
         internal void UpdateVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
             m_VehicleStatus = i_VehicleStatus;

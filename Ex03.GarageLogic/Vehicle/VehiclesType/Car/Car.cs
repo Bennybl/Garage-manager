@@ -92,7 +92,5 @@ namespace Ex03.GarageLogic
         {
             return String.Format("Car color: {0} Number of doors: {1}" ,m_Color, m_numOfDoors);
         }
-
-     
     }
 }

@@ -29,7 +29,6 @@ namespace Ex03.GarageLogic
                 m_Engine.m_FuelType = eFuelType.Soler;
         }
         
-
         internal override void SetTires()
         {
             for (int i = 0; i < sr_NumOfTires; i++)

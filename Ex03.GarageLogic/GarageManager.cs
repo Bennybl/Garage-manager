@@ -115,9 +115,9 @@ namespace Ex03.GarageLogic
         }
 
         //to implement
-        private void InsertNewVehicleIntoGarage(eEngineBased i_EngineBased, eVehicleType i_eVehicleType, string i_LicenceNumber, string i_ModelName)
+        private void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials;)
         {
-            m_CurrentVehicleCreation = new VehicleCreator(i_EngineBased, i_eVehicleType, i_LicenceNumber, i_ModelName);
+            
             
         }
 

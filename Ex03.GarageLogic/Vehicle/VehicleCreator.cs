@@ -12,13 +12,6 @@ namespace Ex03.GarageLogic
         private string m_LicenceNumber;
         private string m_ModelName;
 
-        
-        ;
-        eLicenseType m_LicenseType;
-        private eColor m_Color;
-        private int m_numOfDoors;
-        
-
         internal VehicleCreator(Dictionary<string, Object> i_VehicleMetrials)
         {
             m_VehicleMetrials = i_VehicleMetrials;
@@ -36,6 +29,7 @@ namespace Ex03.GarageLogic
 
             return CreateVehicle();
         }
+
         internal Vehicle SetMotorcycleMaterials(int i_EngineVolume, eLicenseType i_LicenseType)
         {
             m_EngineVolume = i_EngineVolume;
@@ -43,6 +37,7 @@ namespace Ex03.GarageLogic
 
             return CreateVehicle();
         }
+
         internal Vehicle SetTruckMaterials(float i_MaxCapcity,bool i_isHavingDangerousMetrials)
         {
             m_isHavingDangerousMetrials = i_isHavingDangerousMetrials;

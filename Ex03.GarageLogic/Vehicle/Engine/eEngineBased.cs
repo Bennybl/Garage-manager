@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
 {
     enum eEngineBased
     {
-        FuelBased,
-        Electricty
+        FuelBased = 1,
+        Electricty = 2
     }
 }

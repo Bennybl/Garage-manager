@@ -12,13 +12,7 @@ namespace Ex03.GarageLogic
         {
             m_CustomerPhone = i_CustomerPhone;
             m_CustomerName = i_CustomerName;
-            m_CustomerVehicles = new List<VehicleInGarage>();
-
-        }
-
-        internal void UpdateCustomrVehicle(VehicleInGarage i_CustomerVehicle)
-        {
-            m_CustomerVehicles.Add(i_CustomerVehicle);
+          
         }
 
         internal string CustomerName
@@ -29,12 +23,6 @@ namespace Ex03.GarageLogic
         internal string CustomerPhone
         {
             get { return m_CustomerPhone; }
-        }
-
-        internal List<VehicleInGarage> CustomerVehicles
-        {
-            get { return m_CustomerVehicles; }
-    
         }
     }
 
