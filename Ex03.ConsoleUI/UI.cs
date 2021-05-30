@@ -301,7 +301,7 @@ Please choose which program you want to run:
                         case eVehicleType.Motorcycle:
                             i_vehicleProperties.Add("VehicleType", eVehicleType);
                             i_vehicleProperties.Add("EngineVolume", getEngineVolume());
-                            i_vehicleProperties.Add("LicenceType", retrieveLicenceType());
+                            i_vehicleProperties.Add("LicenseType", retrieveLicenceType());
                             break;
                         case eVehicleType.Truck:
                             i_vehicleProperties.Add("VehicleType", eVehicleType);
