@@ -117,7 +117,8 @@ namespace Ex03.GarageLogic
         //to implement
         private void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials;)
         {
-            
+            VehicleCreator vehicleCreatorObject = new VehicleCreator(i_VehicleMetrials);
+            Veihcle vehicle = vehicleCreatorObject.Vehicle();
             
         }
 

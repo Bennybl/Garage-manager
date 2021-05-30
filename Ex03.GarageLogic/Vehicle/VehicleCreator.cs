@@ -11,14 +11,16 @@ namespace Ex03.GarageLogic
         private eVehicleType m_eVehicleType;
         private string m_LicenceNumber;
         private string m_ModelName;
+        private Veicle m_CurrentVehicle;
 
         internal VehicleCreator(Dictionary<string, Object> i_VehicleMetrials)
         {
             m_VehicleMetrials = i_VehicleMetrials;
             m_EngineBased = (eEngineBased) m_VehicleMetrials["EngineBased"];
-            m_eVehicleType = (eVehicleType)m_VehicleMetrials[""];
-            m_ModelName = (string)m_VehicleMetrials[""];
-            
+            m_eVehicleType = (eVehicleType)m_VehicleMetrials["VehicleType"];
+            m_ModelName = (string)m_VehicleMetrials["ModelName"];
+            m_LicenceNumber = (string)m_VehicleMetrials["LicenceNumber"];
+            m_CurrentVehicle = CreateVehicle();
 
         }
 
@@ -54,15 +56,15 @@ namespace Ex03.GarageLogic
         {
            
             case eVehicleType.Car:
-                    int numOfDoors = (int)m_VehicleMetrials["NumOfDoors"];
-                    eColor color = (eColor)m_VehicleMetrials["Color"];
-                    vehicle = new Car(m_EngineBased, numOfDoors, color, m_LicenceNumber, m_ModelName);
+                int numOfDoors = (int)m_VehicleMetrials["NumOfDoors"];
+                eColor color = (eColor)m_VehicleMetrials["Color"];
+                vehicle = new Car(m_EngineBased, numOfDoors, color, m_LicenceNumber, m_ModelName);
                 break;
             
             case eVehicleType.Motorcycle:
                 int engineVolume  = (int)m_VehicleMetrials["EngineVolume"];
                 eLicenseType licenseType = (eLicenseType)m_VehicleMetrials["LicenseType"];
-                vehicle = new Motorcycle(m_EngineBased, licenseType,engineVolume, m_LicenceNumber, m_ModelName   );
+                vehicle = new Motorcycle(m_EngineBased, licenseType,engineVolume, m_LicenceNumber, m_ModelName);
                 break;
             
             case eVehicleType.Truck:
@@ -72,6 +74,11 @@ namespace Ex03.GarageLogic
                 break;
         }
             return vehicle;
+        }
+
+        internal Vehicle Vehicle
+        {
+            get { return m_CurrentVehicle; }
         }
     }
 }
