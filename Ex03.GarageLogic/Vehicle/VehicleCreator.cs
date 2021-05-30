@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
         {
            
             case eVehicleType.Car:
-                int numOfDoors = (int)m_VehicleMetrials["NumOfDoors"];
+                eNumOfDoors numOfDoors = (eNumOfDoors)m_VehicleMetrials["NumOfDoors"];
                 eColor color = (eColor)m_VehicleMetrials["Color"];
                 vehicle = new Car(m_EngineBased, numOfDoors, color, m_LicenceNumber, m_ModelName);
                 break;
