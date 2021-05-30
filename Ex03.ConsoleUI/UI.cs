@@ -216,16 +216,17 @@ Please choose which program you want to run:
 
             while (!isValidInput)
             {
-                Console.WriteLine("Please enter your full name (first and last name\n");
+                Console.WriteLine("Please enter your full name \n");
                 inputStringFromUser = Console.ReadLine();
-                string[] firstAndLastName = inputStringFromUser.Split(',');
+                string[] firstAndLastName = inputStringFromUser.Split(' ');
                 if (firstAndLastName.Length == 2)
                 {
                     isValidFirstName = isOnlyLetters(firstAndLastName[0]);
                     isValidLastName = isOnlyLetters(firstAndLastName[1]);
-                    isValidInput = isValidFirstName && isValidLastName; 
+                    isValidInput = isValidFirstName && isValidLastName;
+                    break;
                 }
-
+                
                 Console.WriteLine("The input you entered is invalid. Please try again.\n");
             }
             return inputStringFromUser;
@@ -257,21 +258,23 @@ Please choose which program you want to run:
         private void insertNewVehicle()
         {
             string VehicleNumberFromUser = getLicenceNumberFromUser();
-            string o_CustomerName  = string.Empty;
+            string o_CustomerName = string.Empty;
             string o_CustomerPhone = string.Empty;
-
-            bool isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);
             eEngineBased eEngineBased;
             Dictionary<string, object> i_vehicleProperties = new Dictionary<string, object>();
-            //benny shouldchange the method name to isInGarage
-            if (!isVehicleNewInGarage)
+            try
             {
-                string vehicleAlreadyInGarage = string.Format(
-@"Error according to our system the vehicle
-registered with the given licence number is already in our garage in repair");
-                Console.WriteLine(vehicleAlreadyInGarage);
+                bool isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);   
+                //benny shouldchange the method name to isInGarage
             }
-
+            catch(VehicleNotInGarageException ex)
+            {
+                    string vehicleAlreadyInGarage = string.Format(
+    @"Error according to our system the vehicle
+registered with the given licence number is already in our garage in repair");
+                    Console.WriteLine(vehicleAlreadyInGarage);
+                
+            }
             while (true)
             {
                 eEngineBased = retrieveEngineTypeFromUser();
@@ -283,12 +286,12 @@ registered with the given licence number is already in our garage in repair");
                 }
                 break;
             }
-            newCustomer(out o_CustomerName, out o_CustomerPhone);
+            
             i_vehicleProperties.Add("EngineBased", eEngineBased);
             i_vehicleProperties.Add("VehicleType", retrieveVehicelType(eEngineBased));
             i_vehicleProperties.Add("ModelName", getVehicleModelFromUser());
             i_vehicleProperties.Add("LicenceNumber", VehicleNumberFromUser);
-
+            newCustomer(out o_CustomerName, out o_CustomerPhone);
             myGarage.InsertNewVehicleIntoGarage(i_vehicleProperties, o_CustomerName, o_CustomerPhone);
 
         }
