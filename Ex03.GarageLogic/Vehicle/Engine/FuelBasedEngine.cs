@@ -6,26 +6,8 @@ namespace Ex03.GarageLogic
 {
     internal class FuelBasedEngine : Engine
     {
-        //Exeption to implement
-        internal override void EnergyRefil(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
-        {
 
-            if (i_AmountOfGivenEnergy + m_CurrentEnergy > m_MaximumEnergy)
-            {
-                throw new SystemException();
-            }
-            else if (m_FuelType != i_FuelType)
-            {
-                throw new SystemException();
-            }
-            else
-            {
-                m_CurrentEnergy += i_AmountOfGivenEnergy;
-            }
-
-        }
-
-        internal float FuelLefet
+        internal float FuelLeft
         {
             get { return m_CurrentEnergy; }
         }

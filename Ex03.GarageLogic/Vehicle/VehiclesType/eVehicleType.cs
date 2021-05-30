@@ -8,6 +8,6 @@ namespace Ex03.GarageLogic
     {
         Car = 1,
         Motorcycle = 2,
-        Truck = 3,
+        Truck = 3
     }
 }

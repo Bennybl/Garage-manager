@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
         protected float m_CurrentEnergy;
         protected float m_MaximumEnergy;
         internal eFuelType m_FuelType;
+        protected const float k_MinValue = 0;
 
         internal float MaximumEnergy
         {
@@ -21,23 +22,26 @@ namespace Ex03.GarageLogic
             get { return m_CurrentEnergy; }
         }
 
-        internal abstract void EnergyRefil(float i_AmountOfGivenEnergy, eFuelType i_FuelType);
-        /**
-         *         {
+        //Exeption to implement
+        internal void EnergyRefil(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
+        {
+
             if (i_AmountOfGivenEnergy + m_CurrentEnergy > m_MaximumEnergy)
             {
-                throw new SystemException();
+                throw new ValueOutOfRangeException(k_MinValue, m_MaximumEnergy-m_CurrentEnergy);
             }
-            else if (fuelType != i_fuelType)
+            else if (m_FuelType != i_FuelType)
             {
-                throw new SystemException();
+                throw new WrongFuelTypeExeption(m_FuelType);
             }
             else
             {
                 m_CurrentEnergy += i_AmountOfGivenEnergy;
             }
+
         }
-        **/
+
+
 
         internal void EnergyRefilToMax()
         {

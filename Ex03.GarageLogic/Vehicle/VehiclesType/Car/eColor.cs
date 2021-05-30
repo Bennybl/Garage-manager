@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    enum eColor
+    enum eNumOfDoors
     {
-        Black,
-        White,
-        Silver,
-        Red 
+        Two = 2,
+        Three = 3,
+        Four = 4,
+        Five = 5 
     }
 }

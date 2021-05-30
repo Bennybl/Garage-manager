@@ -14,16 +14,32 @@ namespace Ex03.GarageLogic
 
         internal Car (eEngineBased i_EngineBased, int i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
         {
-            m_numOfDoors =  i_NumberOfDoors;
-            m_Color = i_Color;
-            m_EngineBased = i_EngineBased;
-            m_LicenceNumber = i_LicenceNumber;
-            m_ModelName = i_ModelName;
-            SetVehicleType();
-
-
+            if (isValidInput(i_Color, i_NumberOfDoors))
+            {
+                m_numOfDoors = i_NumberOfDoors;
+                m_Color = i_Color;
+                m_EngineBased = i_EngineBased;
+                m_LicenceNumber = i_LicenceNumber;
+                m_ModelName = i_ModelName;
+                SetVehicleType();
+            }
+            else
+            {
+                throw WrongVehicleInputExeption("Invalis Input, doors range: 2-5 , avalible colors are: red, silver, black and white ");
+            }
         }
 
+        private isValidInput(eColor i_Color, eNumOfDoors i_NumberOfDoors)
+        {
+            bool color = Enum.IsDefined(typeof(eColor), i_Color);
+            bool numberOfDoors = Enum.IsDefined(typeof(eNumOfDoors), i_NumberOfDoors);
+            bool isValid = true;
+            if(!color || !numberOfDoors)
+            {
+                isValid = false;
+            }
+            return isValid;
+        }
         internal override void SetVehicleType()
         {
             if(m_EngineBased == eEngineBased.Electricty)
