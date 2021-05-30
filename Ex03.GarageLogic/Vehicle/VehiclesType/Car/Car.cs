@@ -8,11 +8,11 @@ namespace Ex03.GarageLogic
     internal class Car : Vehicle
     {
         private eColor m_Color;
-        private  int m_numOfDoors;
+        private  eNumOfDoors m_numOfDoors;
         internal static readonly int sr_NumOfTires = 4;
         internal static readonly float sr_MaxTirePressure = 32f;
 
-        internal Car (eEngineBased i_EngineBased, int i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
+        internal Car (eEngineBased i_EngineBased, eNumOfDoors i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
         {
             if (isValidInput(i_Color, i_NumberOfDoors))
             {
@@ -25,11 +25,11 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw WrongVehicleInputExeption("Invalis Input, doors range: 2-5 , avalible colors are: red, silver, black and white ");
+                throw new WrongVehicleInputExeption("Invalis Input, doors range: 2-5 , avalible colors are: red, silver, black and white ");
             }
         }
 
-        private isValidInput(eColor i_Color, eNumOfDoors i_NumberOfDoors)
+        private bool isValidInput(eColor i_Color, eNumOfDoors i_NumberOfDoors)
         {
             bool color = Enum.IsDefined(typeof(eColor), i_Color);
             bool numberOfDoors = Enum.IsDefined(typeof(eNumOfDoors), i_NumberOfDoors);
@@ -93,7 +93,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        internal int NumberOfDoors
+        internal eNumOfDoors NumberOfDoors
         {
             get { return m_numOfDoors; }
 
@@ -106,7 +106,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("Car color: {0} Number of doors: {1}" ,m_Color, m_numOfDoors);
+            return String.Format("");
         }
     }
 }

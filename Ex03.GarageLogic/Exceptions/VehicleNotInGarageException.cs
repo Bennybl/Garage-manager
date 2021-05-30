@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class WrongFuelTypeExeption : Exception
+    public class VehicleNotInGarageException : Exception
     {
 
-        public WrongFuelTypeExeption(eFuelType i_FuelType):
-            base(String.Format("Wrong fuel type exeption! the right fuel type is: {0}" , i_FuelType.ToString()));
-        {
+        public VehicleNotInGarageException() :
+            base("Vehicle is not in garage Exception!")
+        { 
         }
     }
 }

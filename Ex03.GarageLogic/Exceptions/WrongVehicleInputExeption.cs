@@ -4,12 +4,19 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class VehicleNotInGarageException : Exception
+    public class WrongVehicleInputExeption : Exception
     {
 
-        public VehicleNotInGarageException() :
-            base("Vehicle is not in garage Exception!");
+        public WrongVehicleInputExeption(string i_message) :
+            base(i_message)
+
         {
+
         }
     }
 }
+
+
+
+
+    

@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
         //to implement
         public override string ToString()
         {
-            return base.ToString();
+            return String.Format("");
         }
     }
 }
