@@ -3,15 +3,12 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    //change openning char in private/protected method to lower. 
+    ////change openning char in private/protected method to lower. 
     
     public class GarageManager
     {
         private List<VehicleInGarage> m_VehiclesInGarage;
         private List<Customer> m_Customers;
-        VehicleCreator m_CurrentVehicleCreation;
-        Vehicle m_CurrentVehicle;
-        Customer m_CurrentCustomer;
 
         public GarageManager()
         {
@@ -24,7 +21,7 @@ namespace Ex03.GarageLogic
             bool isVehicleInGarage = true;
             if(SearchVehicleByLicenseNumber(i_LicenseNumber) != null)
             {
-                UpdateVehicleStatus(i_LicenseNumber , eVehicleStatus.InRepair);
+                UpdateVehicleStatus(i_LicenseNumber, eVehicleStatus.InRepair);
                 isVehicleInGarage = false;
             }
             
@@ -48,8 +45,7 @@ namespace Ex03.GarageLogic
 
         private List<string> getLicenseNumberByVehicleStatus(eVehicleStatus i_VehicleStatus)
         {
-            List<string> licenseNumberList = new  List<string>();
-
+            List<string> licenseNumberList = new List<string>();
             foreach(VehicleInGarage vehicleInGarage in m_VehiclesInGarage)
             {
                 if(vehicleInGarage.VehicleStatus == i_VehicleStatus)
@@ -64,12 +60,9 @@ namespace Ex03.GarageLogic
         private List<string> getLicenseNumber()
         {
             List<string> licenseNumberList = new List<string>();
-
             foreach (VehicleInGarage vehicleInGarage in m_VehiclesInGarage)
             {
-               
                     licenseNumberList.Add(vehicleInGarage.LicenseNumber);
-                
             }
 
             return licenseNumberList;
@@ -82,7 +75,6 @@ namespace Ex03.GarageLogic
             {
                 vehicleInGarage.UpdateVehicleStatus(i_VehicleStatus);
             }
-
         }
                 
         public void InflameTires(string i_LicenseNumber)
@@ -92,7 +84,6 @@ namespace Ex03.GarageLogic
             {
                 vehicleInGarage.Vehicle.InflameTireToMax();
             }
-
         }
         
         public void RefuelVehicle(float i_ammountToRefeul, eFuelType i_FuelType, string i_LicenseNumber)
@@ -115,12 +106,13 @@ namespace Ex03.GarageLogic
         
         public string GetVehicleInformation(string i_LicenseNumber)
         {
-            string vehicleInfo = "";
+            string vehicleInfo = string.Empty;
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
             if(vehicleInGarage != null)
             {
                 vehicleInfo = vehicleInGarage.ToString();
             }
+
             return vehicleInfo;
         }
 
@@ -134,33 +126,33 @@ namespace Ex03.GarageLogic
                     vehicleInGarage = vInGarage;
                 }
             }
+
             if (vehicleInGarage == null)
             {
                 throw new VehicleNotInGarageException();
             }
+
             return vehicleInGarage;
         }
 
-        private Vehicle CreateNewVehicle(Dictionary<string, Object> i_VehicleMetrials)
+        private Vehicle CreateNewVehicle(Dictionary<string, object> i_VehicleMetrials)
         {
             VehicleCreator vehicleCreatorObject = new VehicleCreator(i_VehicleMetrials);
             Vehicle vehicle = vehicleCreatorObject.Vehicle;
-            return vehicle;
-            
+            return vehicle;  
         }
 
-        private  Customer AddNewCustomer(string i_CustomerName, string i_CustomerPhone)
+        private Customer AddNewCustomer(string i_CustomerName, string i_CustomerPhone)
         {
             Customer customer = new Customer(i_CustomerName, i_CustomerPhone);
             return customer;
         }
         
-        public void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials, string i_CustomerName, string i_CustomerPhone)
+        public void InsertNewVehicleIntoGarage(Dictionary<string, object> i_VehicleMetrials, string i_CustomerName, string i_CustomerPhone)
         {
             Vehicle vehicle = CreateNewVehicle(i_VehicleMetrials);
             Customer customer = AddNewCustomer(i_CustomerName, i_CustomerPhone);
             m_VehiclesInGarage.Add(new VehicleInGarage(vehicle.LicenseNumber, customer, vehicle));
         }
-    }
-   
+    } 
 }
