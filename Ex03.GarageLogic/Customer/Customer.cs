@@ -5,9 +5,9 @@ namespace Ex03.GarageLogic
 {
     internal struct Customer
     {
-        private string m_CustomerPhone;
         private string m_CustomerName;
-
+        private string m_CustomerPhone;
+        
         internal Customer(string i_CustomerName, string i_CustomerPhone)
         {
             m_CustomerPhone = i_CustomerPhone;

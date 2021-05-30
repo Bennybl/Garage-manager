@@ -22,8 +22,7 @@ namespace Ex03.GarageLogic
             m_Customers = new List<Customer>();
         }
 
-        
-        public bool InsertVehicle(int i_LicenseNumber)
+        public bool InsertVehicle(string i_LicenseNumber)
         {
             bool isVehicleInGarage = true;
             if(SearchVehicleByLicenseNumber(i_LicenseNumber) != null)
@@ -54,7 +53,7 @@ namespace Ex03.GarageLogic
         }
 
         //**
-        public void UpdateVehicleStatus(int i_LicenseNumber, eVehicleStatus i_VehicleStatus)
+        public void UpdateVehicleStatus(string i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
             if(vehicleInGarage != null)
@@ -65,7 +64,7 @@ namespace Ex03.GarageLogic
         }
         
         //**
-        public void InflameTires(int i_LicenseNumber)
+        public void InflameTires(string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
             if (vehicleInGarage != null)
@@ -76,7 +75,7 @@ namespace Ex03.GarageLogic
         }
 
         //to implement
-        public void RefuelVehicle(float i_ammountToRefeul, eFuelType i_FuelType, int i_LicenseNumber)
+        public void RefuelVehicle(float i_ammountToRefeul, eFuelType i_FuelType, string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
             if (vehicleInGarage != null)
@@ -86,7 +85,7 @@ namespace Ex03.GarageLogic
         }
         
         //to implement
-        public void ChargeVehicle(float i_ammountToCharge, int i_LicenseNumber)
+        public void ChargeVehicle(float i_ammountToCharge, string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = SearchVehicleByLicenseNumber(i_LicenseNumber);
             if (vehicleInGarage != null)
@@ -96,12 +95,12 @@ namespace Ex03.GarageLogic
         }
         
         //to implement
-        public string GetVehicleInformation(int i_LicenseNumber)
+        public string GetVehicleInformation(string i_LicenseNumber)
         {
             return null;
         }
 
-        private VehicleInGarage SearchVehicleByLicenseNumber(int i_LicenseNumber)
+        private VehicleInGarage SearchVehicleByLicenseNumber(string i_LicenseNumber)
         {
             VehicleInGarage vehicleInGarage = null;
             foreach (VehicleInGarage vInGarage in m_VehiclesInGarage)
@@ -114,44 +113,26 @@ namespace Ex03.GarageLogic
             return vehicleInGarage;
         }
 
-        //to implement
-        private void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials)
+        private Vehicle CreateNewVehicle(Dictionary<string, Object> i_VehicleMetrials)
         {
             VehicleCreator vehicleCreatorObject = new VehicleCreator(i_VehicleMetrials);
             Vehicle vehicle = vehicleCreatorObject.Vehicle;
+            return vehicle;
             
         }
 
-        private Vehicle CreateNewCar(int i_numOfDoors, eColor i_Color)
+        private  Customer AddNewCustomer(string i_CustomerName, string i_CustomerPhone)
         {
-            Vehicle vehicle = m_CurrentVehicleCreation.SetCarMaterials(i_Color, i_numOfDoors);
-            return vehicle;
-        }
-
-        private Vehicle CreateNewTruck(int i_MaxCapcity, bool i_isHavingDangerousMetrials)
-        {
-            Vehicle vehicle = m_CurrentVehicleCreation.SetTruckMaterials(i_MaxCapcity, i_isHavingDangerousMetrials);
-            return vehicle;
-        }
-
-        private Vehicle CreateNewMotorcycle(eLicenseType i_LicenseType, int i_EngineVolume)
-        {
-            Vehicle vehicle = m_CurrentVehicleCreation.SetMotorcycleMaterials(i_EngineVolume, i_LicenseType);
-            return vehicle;
+            Customer customer = new Customer(i_CustomerName, i_CustomerPhone);
+            return customer;
         }
         
-        //to implement
-        private void AddNewCustomer()
+        public void InsertNewVehicleIntoGarage(Dictionary<string, Object> i_VehicleMetrials, string i_CustomerName, string i_CustomerPhone)
         {
-
+            Vehicle vehicle = CreateNewVehicle(i_VehicleMetrials);
+            Customer customer = AddNewCustomer(i_CustomerName, i_CustomerPhone);
+            m_VehiclesInGarage.Add(new VehicleInGarage(vehicle.LicenseNumber, customer, vehicle));
         }
-        
-        //to implement
-        private Customer SearchCustomerByName(string i_CustomerName)
-        {
-            return null;
-        }
-        
     }
    
 }

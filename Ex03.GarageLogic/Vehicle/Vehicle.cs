@@ -22,5 +22,11 @@ namespace Ex03.GarageLogic
 
         internal abstract void InflameTireToMax();
 
+        internal string LicenseNumber
+        {
+            get { return m_LicenceNumber; }
+        }
+
+
     }
 }

@@ -24,30 +24,6 @@ namespace Ex03.GarageLogic
 
         }
 
-        internal Vehicle SetCarMaterials(eColor i_color, int i_numOfDoors)
-        {
-            m_Color = i_color;
-            m_numOfDoors = i_numOfDoors;
-
-            return CreateVehicle();
-        }
-
-        internal Vehicle SetMotorcycleMaterials(int i_EngineVolume, eLicenseType i_LicenseType)
-        {
-            m_EngineVolume = i_EngineVolume;
-            m_LicenseType = i_LicenseType;
-
-            return CreateVehicle();
-        }
-
-        internal Vehicle SetTruckMaterials(float i_MaxCapcity,bool i_isHavingDangerousMetrials)
-        {
-            m_isHavingDangerousMetrials = i_isHavingDangerousMetrials;
-            m_MaxCapcity = i_MaxCapcity;
-
-            return CreateVehicle();
-        }
-
         internal Vehicle CreateVehicle()
         {
             Vehicle vehicle = null;

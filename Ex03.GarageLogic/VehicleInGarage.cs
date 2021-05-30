@@ -6,12 +6,12 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleInGarage
     {
-        private int m_LicenseNumber;
+        private string m_LicenseNumber;
         private Customer m_VehicleOwener;
         private eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
 
-        internal VehicleInGarage(int i_LicenseNumber, Customer i_VehicleOwener, Vehicle i_Vehicle)
+        internal VehicleInGarage(string i_LicenseNumber, Customer i_VehicleOwener, Vehicle i_Vehicle)
         {
             m_LicenseNumber = i_LicenseNumber;
             m_VehicleOwener = i_VehicleOwener;
@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic
             m_Vehicle = i_Vehicle;
         }
 
-        internal int LicenseNumber
+        internal string LicenseNumber
         {
             get { return m_LicenseNumber; }
         }
