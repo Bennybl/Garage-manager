@@ -106,7 +106,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Color: {1}, Number of doors: {2}", base.ToString(), m_Color, m_numOfDoors);
+            return string.Format(
+@"{0}, 
+Color: {1}, 
+Number of doors: {2}", base.ToString(), m_Color, m_numOfDoors);
         }
     }
 }

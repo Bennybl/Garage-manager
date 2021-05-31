@@ -30,7 +30,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Model Name: {1}, Tires {2}", m_Engine.ToString(), m_ModelName, m_VehicleTire[0].ToString());
+            return string.Format(
+ @"{0}, 
+Model Name: {1}, 
+Tires {2}", m_Engine.ToString(), m_ModelName, m_VehicleTire[0].ToString());
         }
     }
 }

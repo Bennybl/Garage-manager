@@ -68,7 +68,10 @@ namespace Ex03.GarageLogic
         ////to implement
         public override string ToString()
         {
-            return string.Format("{0}, Max Capcity: {1}, is having dangerous metrials: {2}", base.ToString(), m_MaxCapcity, m_isHavingDangerousMetrials);
+            return string.Format(
+@"{0}, 
+Max Capcity: {1}, 
+Is having dangerous metrials: {2}", base.ToString(), m_MaxCapcity, m_isHavingDangerousMetrials);
         }
     }
 }
