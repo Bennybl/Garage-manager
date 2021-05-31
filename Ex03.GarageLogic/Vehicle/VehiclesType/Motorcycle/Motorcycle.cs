@@ -41,14 +41,14 @@ namespace Ex03.GarageLogic
         {
             if (m_EngineBased == eEngineBased.Electricty)
             {
-                ElectrictyBasedEngine m_Engine = new ElectrictyBasedEngine();
+                m_Engine = new ElectrictyBasedEngine();
                 m_Engine.MaximumEnergy = 1.8f;
                 m_Engine.m_FuelType = eFuelType.electricty;
 
             }
             else
             {
-                FuelBasedEngine m_Engine = new FuelBasedEngine();
+                m_Engine = new FuelBasedEngine();
                 m_Engine.MaximumEnergy = 6f;
                 m_Engine.m_FuelType = eFuelType.Octan98;
             }
