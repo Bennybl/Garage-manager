@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
 
         internal override void EnergyRefill(float i_AmountOfGivenEnergy, eFuelType i_FuelType)
         {
-            m_Engine.EnergyRefil(i_AmountOfGivenEnergy, FuelType);
+            m_Engine.EnergyRefil(i_AmountOfGivenEnergy, i_FuelType);
             m_CurrentEnergy = m_Engine.CurrentEnergy;
         }
 
