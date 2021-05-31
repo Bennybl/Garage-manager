@@ -231,7 +231,6 @@ Please choose which program you want to run:
                     {
                         break;
                     }
-
                 }
 
                 Console.WriteLine("The input you entered is invalid. Please try again.\n");
@@ -519,6 +518,7 @@ registered with the given licence number is already in our garage in repair");
                 {
                     break;
                 }
+
                 isValidInput = int.TryParse(inputNumberFromUser, out int o_VehicleLicenceNumber);
                 isValidInput = isValidInput && inputNumberFromUser.Length == 7;
                 if (isValidInput)
@@ -526,7 +526,7 @@ registered with the given licence number is already in our garage in repair");
                     break;
                 }
 
-                Console.WriteLine("Invalid phone number please try again");
+                Console.WriteLine("Invalid license number please try again");
             }
 
             return inputNumberFromUser;
@@ -539,7 +539,6 @@ registered with the given licence number is already in our garage in repair");
             if (numberOfLicenseNumbersToDisplay == 0)
             {
                 Console.WriteLine("No license numbers to display.");
-                displayLicenseOfVehiclesInTheGarage();
             }
             else
             {
@@ -549,9 +548,11 @@ registered with the given licence number is already in our garage in repair");
                     Console.WriteLine(licencePlate);
                 }
             }
+
+            displayLicenseOfVehiclesInTheGarage();
         } 
 
-            private void displayLicenseOfVehiclesInTheGarage()
+        private void displayLicenseOfVehiclesInTheGarage()
         {
             List<string> o_ListOfLicenseNumbersToDisplay = new List<string>();
             eVehicleStatus eVehicleStatus;
@@ -559,6 +560,11 @@ registered with the given licence number is already in our garage in repair");
             while (true)
             {
                 eVehicleStatus = retrieveUserFilterSelection();
+                if(eVehicleStatus  == eVehicleStatus.Abort)
+                {
+                    return;
+                }
+
                 switch (eVehicleStatus)
                 {
                     case eVehicleStatus.None:
@@ -570,8 +576,8 @@ registered with the given licence number is already in our garage in repair");
 
                 break;
             }
+
             printLicenseOfVehiclesInTheGarage(o_ListOfLicenseNumbersToDisplay);
-            
         }
 
         private static void showFilterMenu()
@@ -581,7 +587,8 @@ registered with the given licence number is already in our garage in repair");
 1. Display All - No Filter
 2. Vehicles in Repair
 3. Repaired Vehicles
-4. Payment Done");
+4. Payment Done
+5. Return to main Menu");
             Console.WriteLine(mainMenu);
         }
 
@@ -607,18 +614,26 @@ registered with the given licence number is already in our garage in repair");
 
         private static eVehicleStatus retrieveUserVehicleStatus()
         {
+            int userChoice = 0;
+            bool isValid = false;
             string inputFromUser;
             eVehicleStatus eVehicleStatus;
-
             showVehicleUpdateStatusMenu();
             inputFromUser = Console.ReadLine();
             try
             {
-                eVehicleStatus = (eVehicleStatus)(int.Parse(inputFromUser) + 1);
+                isValid = int.TryParse(inputFromUser, out userChoice);
+                if (isValid && (userChoice < 1 || userChoice > 4))
+                {
+                    Console.WriteLine("Illegal input");
+                    return retrieveUserFilterSelection();
+                }
+
+                eVehicleStatus = (eVehicleStatus)(userChoice + 1);
             }
-            catch (Exception ex)
+            catch
             {
-                ex.ToString();
+                Console.WriteLine("Illegal input");
                 return retrieveUserFilterSelection();
             }
 
@@ -638,6 +653,11 @@ registered with the given licence number is already in our garage in repair");
             while (true)
             {
                 i_eVehicleStatus = retrieveUserVehicleStatus();
+                if(i_eVehicleStatus == eVehicleStatus.Abort)
+                {
+                    return;
+                }
+
                 switch (i_eVehicleStatus)
                 {
                     case eVehicleStatus.InRepair:
@@ -666,7 +686,8 @@ registered with the given licence number is already in our garage in repair");
 @"Please choose which status would you like to set for the current vehicle:
 1. In Repair
 2. Repaired Vehicle
-3. Payment Done");
+3. Payment Done
+4. Return to main menu");
             Console.WriteLine(statusMenu);
         }
 
@@ -688,6 +709,10 @@ registered with the given licence number is already in our garage in repair");
                 Console.WriteLine(ex.Message);
                 inflateTiresToMaximum();
             }
+
+            string msg = string.Format(@"The tires of vehicle {0} were inflated to max succesfully", o_LicenceNumber);
+            Console.WriteLine(msg);
+            Console.WriteLine();
         }
 
         private void refuelVehicle()
@@ -696,6 +721,11 @@ registered with the given licence number is already in our garage in repair");
             float amountToRefuel;
             bool o_ExitProgram = false;
             eFuelType eFuelType;
+
+            if(vehicleNum == "e" || vehicleNum == "E")
+            {
+                return;
+            }
 
             while (true)
             {
@@ -719,15 +749,19 @@ registered with the given licence number is already in our garage in repair");
                         catch (ValueOutOfRangeException ex)
                         {
                             Console.WriteLine(ex.Message);
+                            refuelVehicle();
                         }
                         catch (VehicleNotInGarageException ex)
                         {
                             Console.WriteLine(ex.Message);
+                            refuelVehicle();
                         }
                         catch (WrongFuelTypeExeption ex)
                         {
                             Console.WriteLine(ex.Message);
+                            refuelVehicle();
                         }
+
                         break;
                 }
 
@@ -739,7 +773,7 @@ registered with the given licence number is already in our garage in repair");
         {
             bool isValidInput = true;
             float o_VehicleLicenceNumber = 0;
-            string inputNumberFromUser = string.Empty;
+            string inputNumberFromUser;
             o_ExitProgram = false;
 
             while (!isValidInput)
@@ -751,6 +785,7 @@ registered with the given licence number is already in our garage in repair");
                     o_ExitProgram = true;
                     break;
                 }
+
                 isValidInput = float.TryParse(inputNumberFromUser, out o_VehicleLicenceNumber);
                 isValidInput = isValidInput && o_VehicleLicenceNumber > 0;
                 if (isValidInput)
@@ -760,6 +795,7 @@ registered with the given licence number is already in our garage in repair");
 
                 Console.WriteLine("Invalid input please try again:");
             }
+
             return o_VehicleLicenceNumber;
         }
 
@@ -797,6 +833,12 @@ registered with the given licence number is already in our garage in repair");
         private void chargeVehicle()
         {
             string vehicleNum = getLicenceNumberFromUser();
+
+            if(vehicleNum == "e" || vehicleNum == "E")
+            {
+                return;
+            }
+
             float amountToCharge;
             bool o_ExitProgram = false;
             
@@ -813,10 +855,12 @@ registered with the given licence number is already in our garage in repair");
             catch (ValueOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
+                chargeVehicle();
             }
             catch (VehicleNotInGarageException ex)
             {
                 Console.WriteLine(ex.Message);
+                chargeVehicle();
             }      
         }
 
@@ -839,6 +883,7 @@ registered with the given licence number is already in our garage in repair");
                 Console.WriteLine(ex.Message);
                 displayVehicleInformation();
             }
+
             Console.WriteLine(vehicleInformation);
         }
     }
