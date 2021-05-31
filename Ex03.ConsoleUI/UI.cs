@@ -772,7 +772,7 @@ registered with the given licence number is already in our garage in repair");
         private static float getAmountToRefuelOrCharge(out bool o_ExitProgram)
         {
             bool isValidInput = true;
-            float o_VehicleLicenceNumber = 0;
+            float o_AmountToFill = 0;
             string inputNumberFromUser;
             o_ExitProgram = false;
 
@@ -786,8 +786,8 @@ registered with the given licence number is already in our garage in repair");
                     break;
                 }
 
-                isValidInput = float.TryParse(inputNumberFromUser, out o_VehicleLicenceNumber);
-                isValidInput = isValidInput && o_VehicleLicenceNumber > 0;
+                isValidInput = float.TryParse(inputNumberFromUser, out o_AmountToFill);
+                isValidInput = isValidInput && o_AmountToFill > 0;
                 if (isValidInput)
                 {
                     break;
@@ -796,7 +796,7 @@ registered with the given licence number is already in our garage in repair");
                 Console.WriteLine("Invalid input please try again:");
             }
 
-            return o_VehicleLicenceNumber;
+            return o_AmountToFill;
         }
 
         private static void showFuelTypeMenu()
