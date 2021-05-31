@@ -54,7 +54,7 @@ Please choose which program you want to run:
             {
                 eUserChoice = (eUserChoice)int.Parse(userInput);
             }
-            catch 
+            catch
             {
                 Console.WriteLine("Illegal input");
                 return retrieveUserProgramSelection();
@@ -116,7 +116,7 @@ Please choose which program you want to run:
             {
                 eEngineBased = (eEngineBased)int.Parse(inputFromUser);
             }
-            catch 
+            catch
             {
                 Console.WriteLine("Illegal input please try again");
                 return retrieveEngineTypeFromUser();
@@ -124,7 +124,7 @@ Please choose which program you want to run:
 
             return eEngineBased;
         }
-        
+
         private static void showFuelBasedVehiclesMenu()
         {
             string vehicleType = string.Format(
@@ -165,7 +165,7 @@ Please choose which program you want to run:
                 vehicleType = int.Parse(inputFromUser);
                 eVehicleType = (eVehicleType)vehicleType;
             }
-            catch 
+            catch
             {
                 Console.WriteLine("Illegal input:");
                 return retrieveVehicelType(eEngineBased);
@@ -231,9 +231,9 @@ Please choose which program you want to run:
                     {
                         break;
                     }
- 
+
                 }
-                
+
                 Console.WriteLine("The input you entered is invalid. Please try again.\n");
             }
 
@@ -388,7 +388,7 @@ registered with the given licence number is already in our garage in repair");
                     break;
                 }
 
-               Console.WriteLine("Inalid input you can press either 1 or 2");
+                Console.WriteLine("Inalid input you can press either 1 or 2");
             }
 
             return carryDangerousMaterials;
@@ -515,7 +515,7 @@ registered with the given licence number is already in our garage in repair");
             {
                 Console.WriteLine("Please enter Israeli license number or press E to return to main menu");
                 inputNumberFromUser = Console.ReadLine();
-                if(inputNumberFromUser == "e" || inputNumberFromUser == "E")
+                if (inputNumberFromUser == "e" || inputNumberFromUser == "E")
                 {
                     break;
                 }
@@ -532,28 +532,10 @@ registered with the given licence number is already in our garage in repair");
             return inputNumberFromUser;
         }
 
-        private void displayLicenseOfVehiclesInTheGarage()
+        private void printLicenseOfVehiclesInTheGarage(List<string> o_ListOfLicenseNumbersToDisplay)
         {
-            List<string> listOfLicenseNumbersToDisplay = new List<string>();
-            eVehicleStatus eVehicleStatus;
-            int numberOfLicenseNumbersToDisplay;
+            int numberOfLicenseNumbersToDisplay = o_ListOfLicenseNumbersToDisplay.Count;
 
-            while (true)
-            {
-                eVehicleStatus = retrieveUserFilterSelection();
-                switch (eVehicleStatus)
-                {
-                    case eVehicleStatus.None:
-                    case eVehicleStatus.InRepair:
-                    case eVehicleStatus.Repaired:
-                        listOfLicenseNumbersToDisplay = myGarage.GetLicenseNumberByVehicleStatus(eVehicleStatus);
-                        break;
-                }
-
-                break;
-            }
-
-            numberOfLicenseNumbersToDisplay = listOfLicenseNumbersToDisplay.Count;
             if (numberOfLicenseNumbersToDisplay == 0)
             {
                 Console.WriteLine("No license numbers to display.");
@@ -562,11 +544,34 @@ registered with the given licence number is already in our garage in repair");
             else
             {
                 Console.WriteLine("List of licenses (according to your filter option):");
-                foreach (string licencePlate in listOfLicenseNumbersToDisplay)
+                foreach (string licencePlate in o_ListOfLicenseNumbersToDisplay)
                 {
                     Console.WriteLine(licencePlate);
                 }
             }
+        } 
+
+            private void displayLicenseOfVehiclesInTheGarage()
+        {
+            List<string> o_ListOfLicenseNumbersToDisplay = new List<string>();
+            eVehicleStatus eVehicleStatus;
+            
+            while (true)
+            {
+                eVehicleStatus = retrieveUserFilterSelection();
+                switch (eVehicleStatus)
+                {
+                    case eVehicleStatus.None:
+                    case eVehicleStatus.InRepair:
+                    case eVehicleStatus.Repaired:
+                        o_ListOfLicenseNumbersToDisplay = myGarage.GetLicenseNumberByVehicleStatus(eVehicleStatus);
+                        break;
+                }
+
+                break;
+            }
+            printLicenseOfVehiclesInTheGarage(o_ListOfLicenseNumbersToDisplay);
+            
         }
 
         private static void showFilterMenu()
@@ -637,13 +642,15 @@ registered with the given licence number is already in our garage in repair");
                 {
                     case eVehicleStatus.InRepair:
                     case eVehicleStatus.Repaired:
+                    case eVehicleStatus.Paid:
                         try
                         {
                             myGarage.UpdateVehicleStatus(o_LicenceNumber, i_eVehicleStatus);
                         }
                         catch (VehicleNotInGarageException ex)
                         {
-                            Console.WriteLine(ex.Message);   
+                            Console.WriteLine(ex.Message);
+                            updateVehicleStatusInGarage();
                         }
 
                         break;
