@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
 
         internal override void SetVehicleType()
         {
-                FuelBasedEngine m_Engine = new FuelBasedEngine();
+                m_Engine = new FuelBasedEngine();
                 m_Engine.MaximumEnergy = 120f;
                 m_Engine.m_FuelType = eFuelType.Soler;
         }
