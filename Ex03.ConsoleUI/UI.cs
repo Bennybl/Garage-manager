@@ -701,7 +701,7 @@ registered with the given licence number is already in our garage in repair");
                     Console.WriteLine("The input you entered is invalid. Please try again.\n");
                 }
 
-                Console.WriteLine("Please enter amount to refuel");
+                Console.WriteLine("Please enter amount to fill");
                 string inputNumberFromUser = Console.ReadLine();
                 isValidInput = float.TryParse(inputNumberFromUser, out o_VehicleLicenceNumber);
                 if (isValidInput && o_VehicleLicenceNumber > 0)
