@@ -745,18 +745,18 @@ registered with the given licence number is already in our garage in repair");
                         try
                         {
                             myGarage.RefuelVehicle(amountToRefuel, eFuelType, vehicleNum);
-                        }
-                        catch (ValueOutOfRangeException ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                            refuelVehicle();
-                        }
+                        } 
                         catch (VehicleNotInGarageException ex)
                         {
                             Console.WriteLine(ex.Message);
                             refuelVehicle();
                         }
                         catch (WrongFuelTypeExeption ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            refuelVehicle();
+                        }
+                        catch (ValueOutOfRangeException ex)
                         {
                             Console.WriteLine(ex.Message);
                             refuelVehicle();
@@ -771,7 +771,7 @@ registered with the given licence number is already in our garage in repair");
 
         private static float getAmountToRefuelOrCharge(out bool o_ExitProgram)
         {
-            bool isValidInput = true;
+            bool isValidInput = false;
             float o_AmountToFill = 0;
             string inputNumberFromUser;
             o_ExitProgram = false;
@@ -852,16 +852,21 @@ registered with the given licence number is already in our garage in repair");
             {
                 myGarage.ChargeVehicle(amountToCharge, vehicleNum);
             }
+            catch (VehicleNotInGarageException ex)
+            {
+                Console.WriteLine(ex.Message);
+                chargeVehicle();
+            }
+            catch (WrongFuelTypeExeption ex)
+            {
+                Console.WriteLine(ex.Message);
+                chargeVehicle();
+            }
             catch (ValueOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
                 chargeVehicle();
             }
-            catch (VehicleNotInGarageException ex)
-            {
-                Console.WriteLine(ex.Message);
-                chargeVehicle();
-            }      
         }
 
         private void displayVehicleInformation()
