@@ -212,8 +212,8 @@ Please choose which program you want to run:
 
         private static string getCustomerNameFromUser()
         {
-            bool isValidFirstName = true;
-            bool isValidLastName = true;
+            bool isValidFirstName;
+            bool isValidLastName;
             bool isValidInput = false;
             string inputStringFromUser = string.Empty;
 
@@ -227,7 +227,11 @@ Please choose which program you want to run:
                     isValidFirstName = isOnlyLetters(firstAndLastName[0]);
                     isValidLastName = isOnlyLetters(firstAndLastName[1]);
                     isValidInput = isValidFirstName && isValidLastName;
-                    break;
+                    if (isValidInput)
+                    {
+                        break;
+                    }
+ 
                 }
                 
                 Console.WriteLine("The input you entered is invalid. Please try again.\n");
@@ -262,17 +266,17 @@ Please choose which program you want to run:
         private void insertNewVehicle()
         {
             string VehicleNumberFromUser = getLicenceNumberFromUser();
-            string o_CustomerName = string.Empty;
-            string o_CustomerPhone = string.Empty;
+            string o_CustomerName, o_CustomerPhone;
             eEngineBased eEngineBased;
             eVehicleType eVehicleType;
             bool isVehicleNewInGarage = true;
             Dictionary<string, object> i_vehicleProperties = new Dictionary<string, object>();
+
             try
             {
                 isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);
             }
-            catch (VehicleNotInGarageException ex)
+            catch (VehicleNotInGarageException)
             {
                 while (true)
                 {
@@ -320,6 +324,9 @@ Please choose which program you want to run:
 
                 newCustomer(out o_CustomerName, out o_CustomerPhone);
                 myGarage.InsertNewVehicleIntoGarage(i_vehicleProperties, o_CustomerName, o_CustomerPhone);
+                string msg = string.Format("\n The {0} was added succesfully to our system", eVehicleType);
+                Console.WriteLine(msg);
+                Console.WriteLine();
             }
 
             if (!isVehicleNewInGarage)
@@ -342,7 +349,6 @@ registered with the given licence number is already in our garage in repair");
                 isValid = float.TryParse(inputFromUser, out o_MaxCapacity);
                 if (isValid && o_MaxCapacity > 0)
                 {
-                    isValid = true;
                     break;
                 }
 
@@ -425,7 +431,6 @@ registered with the given licence number is already in our garage in repair");
                 isValid = int.TryParse(inputFromUser, out o_EngineVolume);
                 if (isValid && o_EngineVolume > 0)
                 {
-                    isValid = true;
                     break;
                 }
 
@@ -701,7 +706,7 @@ registered with the given licence number is already in our garage in repair");
         private static float getAmountToRefuelOrCharge()
         {
             bool isValidInput = true;
-            float o_VehicleLicenceNumber = 0;
+            float o_VehicleLicenceNumber;
             while (true)
             {
                 if (!isValidInput)
@@ -775,7 +780,16 @@ registered with the given licence number is already in our garage in repair");
         private void displayVehicleInformation()
         {
             string o_licenceNumber = getLicenceNumberFromUser();
-            string vehicleInformation = myGarage.GetVehicleInformation(o_licenceNumber);
+            string vehicleInformation = string.Empty;
+            try
+            {
+                vehicleInformation = myGarage.GetVehicleInformation(o_licenceNumber);
+            }
+            catch (VehicleNotInGarageException ex)
+            {
+                Console.WriteLine(ex.Message);
+                displayVehicleInformation();
+            }
             Console.WriteLine(vehicleInformation);
         }
     }
