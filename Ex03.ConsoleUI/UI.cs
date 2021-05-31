@@ -762,6 +762,7 @@ registered with the given licence number is already in our garage in repair");
                             refuelVehicle();
                         }
 
+                        Console.WriteLine("\nThe vehicle was refueled successfully\n");
                         break;
                 }
 
@@ -867,6 +868,7 @@ registered with the given licence number is already in our garage in repair");
                 Console.WriteLine(ex.Message);
                 chargeVehicle();
             }
+            Console.WriteLine("\nThe vehicle was refueled successfully\n");
         }
 
         private void displayVehicleInformation()
