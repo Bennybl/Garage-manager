@@ -1,14 +1,14 @@
-﻿using Ex03.GarageLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    class UI
+    public class UI
     {
         private GarageManager myGarage;
+
         private enum eUserChoice
         {
             InsertNewVehicle = 1,
@@ -20,7 +20,6 @@ namespace Ex03.ConsoleUI
             DisplayVehicleInformation = 7,
             Abort = 8
         }
-
 
         public void ExecutePrograms()
         {
@@ -125,6 +124,7 @@ Please choose which program you want to run:
 
             return eEngineBased;
         }
+        
         private static void showFuelBasedVehiclesMenu()
         {
             string vehicleType = string.Format(
@@ -170,11 +170,14 @@ Please choose which program you want to run:
                 Console.WriteLine("Illegal input:");
                 return retrieveVehicelType(eEngineBased);
             }
+
             if (eEngineBased == eEngineBased.Electricty && vehicleType != 1 && vehicleType != 2)
             {
                 Console.WriteLine("wrong input please try again:");
+
                 return retrieveVehicelType(eEngineBased);
             }
+
             return eVehicleType;
         }
 
@@ -197,7 +200,7 @@ Please choose which program you want to run:
             bool isValidInput = true;
             foreach (char c in inputString)
             {
-                if (!Char.IsLetter(c))
+                if (!char.IsLetter(c))
                 {
                     isValidInput = false;
                     break;
@@ -229,6 +232,7 @@ Please choose which program you want to run:
                 
                 Console.WriteLine("The input you entered is invalid. Please try again.\n");
             }
+
             return inputStringFromUser;
         }
 
@@ -267,7 +271,6 @@ Please choose which program you want to run:
             try
             {
                 isVehicleNewInGarage = myGarage.InsertVehicle(VehicleNumberFromUser);
-                //benny shouldchange the method name to isInGarage
             }
             catch (VehicleNotInGarageException ex)
             {
@@ -280,6 +283,7 @@ Please choose which program you want to run:
                         case eEngineBased.Electricty:
                             break;
                     }
+
                     break;
                 }
 
@@ -310,13 +314,14 @@ Please choose which program you want to run:
 
                             break;
                     }
+
                     break;
                 }
 
-                
                 newCustomer(out o_CustomerName, out o_CustomerPhone);
                 myGarage.InsertNewVehicleIntoGarage(i_vehicleProperties, o_CustomerName, o_CustomerPhone);
             }
+
             if (!isVehicleNewInGarage)
             {
                 string vehicleAlreadyInGarage = string.Format(
@@ -340,6 +345,7 @@ registered with the given licence number is already in our garage in repair");
                     isValid = true;
                     break;
                 }
+
                 Console.WriteLine("Illegal input please try again:");
             }
 
@@ -376,6 +382,7 @@ registered with the given licence number is already in our garage in repair");
 
             return carryDangerousMaterials;
         }
+
         private static void showMotorLicenceTypeMenu()
         {
             string mainMenu = string.Format(
@@ -421,6 +428,7 @@ registered with the given licence number is already in our garage in repair");
                     isValid = true;
                     break;
                 }
+
                 Console.WriteLine("Illegal input please try again:");
             }
 
@@ -529,8 +537,10 @@ registered with the given licence number is already in our garage in repair");
                         listOfLicenseNumbersToDisplay = myGarage.GetLicenseNumberByVehicleStatus(eVehicleStatus);
                         break;
                 }
+
                 break;
             }
+
             numberOfLicenseNumbersToDisplay = listOfLicenseNumbersToDisplay.Count;
             if (numberOfLicenseNumbersToDisplay == 0)
             {
@@ -596,6 +606,7 @@ registered with the given licence number is already in our garage in repair");
 
             return eVehicleStatus;
         }
+
         private void updateVehicleStatusInGarage()
         {
             eVehicleStatus eVehicleStatus;
@@ -612,13 +623,14 @@ registered with the given licence number is already in our garage in repair");
                         {
                             myGarage.UpdateVehicleStatus(LicenceNumber, eVehicleStatus);
                         }
-                        catch(VehicleNotInGarageException ex)
+                        catch (VehicleNotInGarageException ex)
                         {
                             Console.WriteLine(ex.Message);   
                         }
-                        // update vehicle status
+
                         break;
                 }
+
                 break;
             }
         }
@@ -640,21 +652,18 @@ registered with the given licence number is already in our garage in repair");
             {
                 myGarage.InflameTires(licenceNumber);
             }
-            catch(VehicleNotInGarageException ex)
+            catch (VehicleNotInGarageException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-            // what should be here?
-
         }
 
         private void refuelVehicle()
         {
             string vehicleNum = getLicenceNumberFromUser();
             float amountToRefuel;
-            // how to check if in system?
             eFuelType eFuelType;
+
             while (true)
             {
                 eFuelType = retrieveFuelType();
@@ -669,25 +678,24 @@ registered with the given licence number is already in our garage in repair");
                         {
                             myGarage.RefuelVehicle(amountToRefuel, eFuelType, vehicleNum);
                         }
-                        catch(ValueOutOfRangeException ex)
+                        catch (ValueOutOfRangeException ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
-                        catch(VehicleNotInGarageException ex)
+                        catch (VehicleNotInGarageException ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
-                        catch(WrongFuelTypeExeption ex)
+                        catch (WrongFuelTypeExeption ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
-                        // to call to Benny's method
+            
                         break;
                 }
+
                 break;
             }
-
-
         }
 
         private static float getAmountToRefuelOrCharge()
