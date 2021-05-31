@@ -52,7 +52,13 @@ Please choose which program you want to run:
             userInput = Console.ReadLine();
             try
             {
-                eUserChoice = (eUserChoice)int.Parse(userInput);
+                int userChoice = int.Parse(userInput);
+                eUserChoice = (eUserChoice)userChoice;
+                if (userChoice < 1 || userChoice > 8)
+                {
+                    Console.WriteLine("Illegal input");
+                    return retrieveUserProgramSelection();
+                }
             }
             catch
             {
@@ -114,7 +120,13 @@ Please choose which program you want to run:
             inputFromUser = Console.ReadLine();
             try
             {
-                eEngineBased = (eEngineBased)int.Parse(inputFromUser);
+                int userInput = int.Parse(inputFromUser);
+                eEngineBased = (eEngineBased)userInput;
+                if (userInput != 1 && userInput != 2)
+                {
+                    Console.WriteLine("Illegal input please try again");
+                    return retrieveEngineTypeFromUser();
+                }
             }
             catch
             {
@@ -413,7 +425,13 @@ registered with the given licence number is already in our garage in repair");
             inputFromUser = Console.ReadLine();
             try
             {
-                eLicenseType = (eLicenseType)int.Parse(inputFromUser);
+                int userInput = int.Parse(inputFromUser);
+                eLicenseType = (eLicenseType)userInput;
+                if (userInput > 4 || userInput < 1)
+                {
+                    Console.WriteLine("Illegal input please try again");
+                    return retrieveLicenceType();
+                }
             }
             catch
             {
@@ -815,16 +833,23 @@ registered with the given licence number is already in our garage in repair");
         {
             string inputFromUser;
              eFuelType eFuelType;
+            int userChoice = 0;
 
             showFuelTypeMenu();
             inputFromUser = Console.ReadLine();
             try
             {
-                eFuelType = (eFuelType)int.Parse(inputFromUser);
+                userChoice = int.Parse(inputFromUser);
+                eFuelType = (eFuelType)userChoice;
+                if(userChoice < 1 || userChoice > 4)
+                {
+                    Console.WriteLine("Illegal input");
+                    return retrieveFuelType();
+                }
             }
-            catch (Exception ex)
+            catch 
             {
-                ex.ToString();
+                Console.WriteLine("Illegal input");
                 return retrieveFuelType();
             }
 
