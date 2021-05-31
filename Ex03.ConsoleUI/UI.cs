@@ -392,7 +392,7 @@ registered with the given licence number is already in our garage in repair");
             string inputFromUser;
             eLicenseType eLicenseType;
 
-            showColorMenu();
+            showMotorLicenceTypeMenu();
             inputFromUser = Console.ReadLine();
             try
             {
