@@ -761,8 +761,7 @@ registered with the given licence number is already in our garage in repair");
                         catch (VehicleNotInGarageException ex)
                         {
                             Console.WriteLine(ex.Message);
-                        }
-                        
+                        }      
         }
 
         private void displayVehicleInformation()
