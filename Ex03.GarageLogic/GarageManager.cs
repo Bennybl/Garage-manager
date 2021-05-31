@@ -7,9 +7,9 @@ namespace Ex03.GarageLogic
     
     public class GarageManager
     {
+        private readonly List<Customer> m_Customers;
         private List<VehicleInGarage> m_VehiclesInGarage;
-        private List<Customer> m_Customers;
-
+       
         public GarageManager()
         {
             m_VehiclesInGarage = new List<VehicleInGarage>();

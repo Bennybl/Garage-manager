@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,11 +7,11 @@ namespace Ex03.GarageLogic
     internal class Car : Vehicle
     {
         private eColor m_Color;
-        private  eNumOfDoors m_numOfDoors;
+        private eNumOfDoors m_numOfDoors;
         internal static readonly int sr_NumOfTires = 4;
         internal static readonly float sr_MaxTirePressure = 32f;
 
-        internal Car (eEngineBased i_EngineBased, eNumOfDoors i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
+        internal Car(eEngineBased i_EngineBased, eNumOfDoors i_NumberOfDoors, eColor i_Color, string i_LicenceNumber, string i_ModelName)
         {
             if (isValidInput(i_Color, i_NumberOfDoors))
             {
@@ -39,16 +38,17 @@ namespace Ex03.GarageLogic
             {
                 isValid = false;
             }
+
             return isValid;
         }
+
         internal override void SetVehicleType()
         {
             if(m_EngineBased == eEngineBased.Electricty)
             {
                 m_Engine = new ElectrictyBasedEngine();
                 m_Engine.MaximumEnergy = 3.2f;
-                m_Engine.m_FuelType = eFuelType.electricty;
-                
+                m_Engine.m_FuelType = eFuelType.electricty;   
             }
             else
             {
@@ -92,13 +92,11 @@ namespace Ex03.GarageLogic
         internal eFuelType FuelType
         {
             get { return m_Engine.m_FuelType; }
-
         }
 
         internal eNumOfDoors NumberOfDoors
         {
             get { return m_numOfDoors; }
-
         }
 
         internal eColor Color
@@ -108,7 +106,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("{0}, Color: {1}, Number of doors: {2}", base.ToString(), m_Color, m_numOfDoors);
+            return string.Format("{0}, Color: {1}, Number of doors: {2}", base.ToString(), m_Color, m_numOfDoors);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,7 +13,6 @@ namespace Ex03.GarageLogic
 
         internal Motorcycle(eEngineBased i_VehicleType, eLicenseType i_LicenseType, int i_EngineVolume, string i_LicenceNumber, string i_ModelName)
         {
-
             if (isValidInput(i_LicenseType))
             {
                 m_LicenseType = i_LicenseType;
@@ -37,6 +35,7 @@ namespace Ex03.GarageLogic
 
             return licenseType;
         }
+
         internal override void SetVehicleType()
         {
             if (m_EngineBased == eEngineBased.Electricty)
@@ -44,7 +43,6 @@ namespace Ex03.GarageLogic
                 m_Engine = new ElectrictyBasedEngine();
                 m_Engine.MaximumEnergy = 1.8f;
                 m_Engine.m_FuelType = eFuelType.electricty;
-
             }
             else
             {
@@ -73,7 +71,6 @@ namespace Ex03.GarageLogic
 
         internal override void InflameTire(float i_GivenAirPressure)
         {
-
             foreach (Tire tire in m_VehicleTire)
             {
                 tire.Inflame(i_GivenAirPressure);
@@ -89,13 +86,12 @@ namespace Ex03.GarageLogic
         internal eFuelType FuelType
         {
             get { return m_Engine.m_FuelType; }
-
         }
 
-        //to implement
+        ////to implement
         public override string ToString()
         {
-            return String.Format("{0}, License type: {1}, Engine volume: {2}", base.ToString(), m_LicenseType, m_EngineVolume);
+            return string.Format("{0}, License type: {1}, Engine volume: {2}", base.ToString(), m_LicenseType, m_EngineVolume);
         }
     }
 }

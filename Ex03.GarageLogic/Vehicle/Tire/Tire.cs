@@ -6,17 +6,16 @@ namespace Ex03.GarageLogic
 {
     internal class Tire
     {
-        private float m_CurrentPressure;
         private readonly float m_MaxPressure;
+        private float m_CurrentPressure;
         private string m_FactoryName = "Michelin";
 
         internal Tire(float i_currentPressure, float i_MaxPressure)
         {
             this.m_CurrentPressure = i_currentPressure;
             this.m_MaxPressure = i_MaxPressure;
-
         }
-        //Exeption to implement
+        ////Exeption to implement
         internal void Inflame(float i_AirPressure)
         {
             if(i_AirPressure + m_CurrentPressure <= m_MaxPressure)
@@ -36,7 +35,7 @@ namespace Ex03.GarageLogic
 
         internal float AirPressure
         {
-            get { return m_CurrentPressure;}
+            get { return m_CurrentPressure; }
         }
 
         internal float MaxAirPressure
@@ -51,9 +50,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("Air pressure: {0}, Factory: {1}"
-                , m_CurrentPressure, m_FactoryName);
+            return string.Format("Air pressure: {0}, Factory: {1}", m_CurrentPressure, m_FactoryName);
         }
     }
-
 }

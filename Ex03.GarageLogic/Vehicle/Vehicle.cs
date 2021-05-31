@@ -13,7 +13,6 @@ namespace Ex03.GarageLogic
         protected eEngineBased m_EngineBased;
         protected Engine m_Engine;
         
-
         internal abstract void SetVehicleType();
 
         internal abstract void EnergyRefill(float i_AmountOfGivenEnergy, eFuelType i_FuelType);
@@ -31,7 +30,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format("{0}, Model Name: {1}, Tires {2}", m_Engine.ToString(), m_ModelName, m_VehicleTire[0].ToString());
+            return string.Format("{0}, Model Name: {1}, Tires {2}", m_Engine.ToString(), m_ModelName, m_VehicleTire[0].ToString());
         }
     }
 }

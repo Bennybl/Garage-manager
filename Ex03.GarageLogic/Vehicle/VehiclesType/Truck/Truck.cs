@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -64,13 +63,12 @@ namespace Ex03.GarageLogic
         internal eFuelType FuelType
         {
             get { return m_Engine.m_FuelType; }
-
         }
 
-        //to implement
+        ////to implement
         public override string ToString()
         {
-            return String.Format("{0}, Max Capcity: {1}, is having dangerous metrials: {2}", base.ToString(), m_MaxCapcity, m_isHavingDangerousMetrials);
+            return string.Format("{0}, Max Capcity: {1}, is having dangerous metrials: {2}", base.ToString(), m_MaxCapcity, m_isHavingDangerousMetrials);
         }
     }
 }

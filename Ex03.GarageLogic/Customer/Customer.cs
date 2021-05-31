@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -11,8 +10,7 @@ namespace Ex03.GarageLogic
         internal Customer(string i_CustomerName, string i_CustomerPhone)
         {
             m_CustomerPhone = i_CustomerPhone;
-            m_CustomerName = i_CustomerName;
-          
+            m_CustomerName = i_CustomerName; 
         }
 
         internal string CustomerName
@@ -30,5 +28,4 @@ namespace Ex03.GarageLogic
             get { return string.Format("Name - {0}, Phone - {1}", m_CustomerName, m_CustomerPhone); }
         }
     }
-
 }
