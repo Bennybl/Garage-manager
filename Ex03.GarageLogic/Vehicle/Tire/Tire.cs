@@ -50,7 +50,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Air pressure: {0}, Factory: {1}", m_CurrentPressure, m_FactoryName);
+            return string.Format(
+@"Current air pressure: {0}, 
+Max air pressure: {1}, 
+Factory: {2}", m_CurrentPressure, m_MaxPressure, m_FactoryName);
         }
     }
 }
